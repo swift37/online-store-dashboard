@@ -1,0 +1,110 @@
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin padding($top, $right, $bottom, $left) {
+  padding-top: $top;
+  padding-right: $right;
+  padding-bottom: $bottom;
+  padding-left: $left;
+}
+
+@mixin margin($top, $right, $bottom, $left) {
+  margin-top: $top;
+  margin-right: $right;
+  margin-bottom: $bottom;
+  margin-left: $left;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin text-ellipsis($number-of-lines: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @if $number-of-lines == 1 {
+    white-space: nowrap;
+  } @else {
+    white-space: inherit;
+
+    @supports (-webkit-line-clamp: $number-of-lines) {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: $number-of-lines;
+    }
+  }
+}
+
+@mixin flex-center($position, $columnDirection: false, $isInline: false) {
+  @if $isInline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
+  @if $position ==
+    "vertical" or
+    ($columnDirection and $position == "horizontal")
+  {
+    align-items: center;
+  } @else if
+    $position ==
+    "horizontal" or
+    ($columnDirection and $position == "vertical")
+  {
+    justify-content: center;
+  } @else if $position == "both" {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@mixin absolute-center($position) {
+  position: absolute;
+
+  @if $position == "vertical" {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  } @else if $position == "horizontal" {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  } @else if $position == "both" {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin square($size) {
+  width: $size;
+  aspect-ratio: 1;
+}
+
+@mixin circle {
+  border-radius: 50%;
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  block-size: 1px !important;
+  inline-size: 1px !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
