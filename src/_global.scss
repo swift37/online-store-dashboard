@@ -1,0 +1,83 @@
+body {
+  color: var();
+}
+
+h1,
+h2,
+h3,
+label,
+.sub-heading,
+.paragraph {
+  color: #000;
+  text-align: left;
+  vertical-align: baseline;
+  font-weight: var(--font-weight-regular);
+}
+
+label,
+.paragraph {
+  font-family: "Inter", sans-serif;
+}
+
+:where(h1, h2, h3, p, label, span).bold {
+  font-weight: var(--font-weight-bold);
+}
+
+:where(h1, h2, h3, p, label, span).medium {
+  font-weight: var(--font-weight-medium);
+}
+
+h1 {
+  font-size: 64px;
+  line-height: 96px;
+}
+
+h2 {
+  font-size: 52px;
+  line-height: 78px;
+}
+
+h3 {
+  font-size: 44px;
+  line-height: 66px;
+}
+
+label.size-l {
+  font-size: 12px;
+  line-height: 15px;
+}
+
+label.size-m {
+  font-size: 11px;
+  line-height: 13px;
+}
+
+label.size-s {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.sub-heading.size-l {
+  font-size: 32px;
+  line-height: 48px;
+}
+
+.sub-heading.size-m {
+  font-size: 28px;
+  line-height: 42px;
+}
+
+.sub-heading.size-s {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.paragraph.size-l {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.paragraph.size-m {
+  font-size: 14px;
+  line-height: 17px;
+}
