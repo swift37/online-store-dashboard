@@ -1,5 +1,5 @@
-@import url(./assets/fonts/Poppins/stylesheet.css);
-
-* {
-  font-family: "Poppins", sans-serif;
-}
+@import "./assets/fonts/Poppins/stylesheet.css";
+@import "./normalize";
+@import "./variables";
+@import "./global";
+@import "./mixins";
