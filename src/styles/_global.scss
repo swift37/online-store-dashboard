@@ -1,7 +1,3 @@
-body {
-  color: var();
-}
-
 h1,
 h2,
 h3,
@@ -12,6 +8,7 @@ label,
   text-align: left;
   vertical-align: baseline;
   font-weight: var(--font-weight-regular);
+  letter-spacing: normal;
 }
 
 label,
