@@ -1,7 +1,20 @@
+$color-primary: #5570f1;
+$color-secondary: #ffcc91;
+$color-black: #1c1d22;
+
 :root {
-  --color-primary: #5570f1;
-  --color-secondary: #ffcc91;
-  --color-black: #1c1d22;
+  @for $i from 10 to 0 {
+    --color-primary-#{$i * 10}: #{rgba($color-primary, calc($i / 10))};
+  }
+
+  @for $i from 10 to 0 {
+    --color-secondary-#{$i * 10}: #{rgba($color-secondary, calc($i / 10))};
+  }
+
+  @for $i from 10 to 0 {
+    --color-black-#{$i * 10}: #{rgba($color-black, calc($i / 10))};
+  }
+
   --color-action-success: #519c66;
   --color-action-fail: #cc5f5f;
 
@@ -14,7 +27,7 @@
   --height-input: 58px;
   --height-search: 45px;
 
-  --padding-input: 8px 16px;
+  --padding-input: 31px 16px 8px;
   --padding-button: 17px 16px;
   --padding-dropdown: 20px 16px;
 
@@ -26,4 +39,5 @@
   --font-weight-bold: 700;
 
   --transition-duration: 0.3s;
+  --transition-all: all 0.3s ease;
 }
