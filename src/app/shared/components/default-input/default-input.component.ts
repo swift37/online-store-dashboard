@@ -15,10 +15,19 @@ export class DefaultInputComponent implements OnChanges {
   @Input() iconPosition: string = 'left';
   @Input() disabled: boolean = false;
 
+  public iconStyle: string = 'light';
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log('change');
     if (this.iconPosition != 'left' && this.iconPosition != 'right') {
       console.error("Icon position should be 'left' or 'right'");
+    }
+
+    if (this.type == 'date') {
+      this.iconName = 'calendar';
+    } else if (this.type == 'time') {
+      this.iconName = 'fi_clock';
+      this.iconStyle = 'feather';
     }
   }
 }
