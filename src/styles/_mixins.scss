@@ -46,6 +46,10 @@
     display: flex;
   }
 
+  @if ($columnDirection) {
+    flex-direction: column;
+  }
+
   @if $position ==
     "vertical" or
     ($columnDirection and $position == "horizontal")
@@ -87,10 +91,12 @@
 
 @mixin square($size) {
   width: $size;
-  aspect-ratio: 1;
+  height: $size;
 }
 
-@mixin circle {
+@mixin circle($size) {
+  width: $size;
+  height: $size;
   border-radius: 50%;
 }
 
