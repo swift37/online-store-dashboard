@@ -57,6 +57,21 @@
     }
   }
 
+  &__icon {
+    @include absolute-center(vertical);
+    @include square(24px);
+    color: var(--color-black-70);
+    z-index: 10;
+
+    &.left {
+      left: 16px;
+    }
+
+    &.right {
+      right: 16px;
+    }
+  }
+
   &__message {
     color: var(--color-black-40);
     transition: var(--transition-all);
@@ -75,6 +90,31 @@
     .icon {
       width: 10px;
       height: 10px;
+    }
+  }
+
+  &:has(#{&}__icon.left) {
+    label {
+      left: 56px;
+    }
+
+    input {
+      padding-left: 56px;
+    }
+  }
+
+  &:has(#{&}__icon.right) {
+    .input-control__check {
+      right: 50px;
+    }
+
+    label {
+      left: 16px;
+    }
+
+    input {
+      padding-left: 16px;
+      padding-right: 80px;
     }
   }
 

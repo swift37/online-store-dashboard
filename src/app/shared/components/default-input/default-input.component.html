@@ -3,8 +3,9 @@
     <label class="size-l" for="{{ id }}">{{ label }}</label>
     <app-svg-icon
       *ngIf="iconName != null"
+      class="input-control__icon {{ iconPosition }}"
       [iconName]="iconName"
-      [iconStyle]="'thin'"
+      [iconStyle]="'light'"
     ></app-svg-icon>
     <input
       [type]="type"
@@ -14,13 +15,13 @@
       [disabled]="disabled ? true : null"
       autocomplete="email"
     />
-    <!-- <span class="input-control__check"
+    <span class="input-control__check"
       ><app-svg-icon
         iconName="vector"
         iconStyle="light"
         class="icon"
       ></app-svg-icon
-    ></span> -->
+    ></span>
   </div>
   <span class="input-control__message paragraph size-m"
     >Helper text goes here</span
