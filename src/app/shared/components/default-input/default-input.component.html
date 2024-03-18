@@ -10,7 +10,7 @@
     <input
       [type]="type"
       [id]="id"
-      [value]="value"
+      [(value)]="value"
       [placeholder]="disabled ? 'Disabled' : placeholder"
       [disabled]="disabled ? true : null"
       autocomplete="email"
@@ -22,6 +22,22 @@
         class="icon"
       ></app-svg-icon
     ></span> -->
+    <div class="input-control__spin" *ngIf="type == 'number'">
+      <button (click)="onIncrease()" [disabled]="disabled ? true : null">
+        <app-svg-icon
+          class="icon"
+          iconName="counter-arrow-up"
+          iconStyle="bold"
+        ></app-svg-icon>
+      </button>
+      <button (click)="onDecrease()" [disabled]="disabled ? true : null">
+        <app-svg-icon
+          class="icon"
+          iconName="counter-arrow-down"
+          iconStyle="bold"
+        ></app-svg-icon>
+      </button>
+    </div>
   </div>
   <span class="input-control__message paragraph size-m"
     >Helper text goes here</span
