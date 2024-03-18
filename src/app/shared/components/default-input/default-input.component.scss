@@ -192,6 +192,22 @@
     }
   }
 
+  &:has(input[type="number"]) {
+    .input-control__check {
+      right: 58px;
+    }
+  }
+
+  &:has(input[type="number"]) :has(#{&}__icon.right) {
+    .input-control__icon {
+      right: 58px;
+    }
+
+    .input-control__check {
+      right: 92px;
+    }
+  }
+
   &:focus-within {
     label {
       color: var(--color-primary-100);
