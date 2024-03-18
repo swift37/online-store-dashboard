@@ -136,6 +136,7 @@
       border: none;
       outline: none;
       transition: var(--transition-all);
+      pointer-events: auto;
       cursor: pointer;
 
       &:last-of-type {
@@ -154,9 +155,14 @@
         height: 10px;
       }
 
-      &:hover {
+      &:not(:disabled):hover {
         color: var(--color-black-60);
         background-color: var(--color-black-20);
+      }
+
+      &:disabled {
+        cursor: default;
+        pointer-events: none;
       }
     }
   }
@@ -246,6 +252,22 @@
       border-color: var(--color-primary-100);
       -webkit-text-fill-color: var(--color-black-70);
       -webkit-background-clip: text;
+    }
+  }
+
+  &.disabled {
+    .input-control__container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: auto;
+      z-index: 20;
+      border-radius: var(--border-radius-default);
+      background-color: rgba($color: #f2f4f5, $alpha: 30%);
     }
   }
 }
