@@ -30,4 +30,12 @@ export class DefaultInputComponent implements OnChanges {
       this.iconStyle = 'feather';
     }
   }
+
+  onIncrease(): void {
+    this.value++;
+  }
+
+  onDecrease(): void {
+    this.value--;
+  }
 }
