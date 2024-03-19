@@ -21,9 +21,8 @@
   }
 
   label {
-    position: absolute;
-    top: 8px;
-    left: 16px;
+    position: block;
+    margin-bottom: 4px;
     z-index: 10;
     color: var(--color-black-70);
     transition: var(--transition-all);
@@ -119,9 +118,9 @@
 
   &__spin {
     @include absolute-center(vertical);
-    right: 8px;
+    right: 5px;
     width: 40px;
-    height: calc(var(--height-input) - 16px);
+    height: calc(var(--height-input) - 10px);
     @include flex-center(both, true);
     gap: 3px;
     z-index: 10;
@@ -163,6 +162,40 @@
       &:disabled {
         cursor: default;
         pointer-events: none;
+      }
+    }
+  }
+
+  &.inner-label {
+    .input-control__container {
+      height: var(--height-input-labeled);
+    }
+
+    label {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+    }
+
+    input {
+      padding: var(--padding-input-labeled);
+    }
+
+    .input-control__spin {
+      right: 8px;
+
+      button {
+        position: relative;
+        width: 100%;
+        height: 19.5px;
+        background-color: #dde2e5;
+        color: #83898c;
+        border-radius: 4px 4px 0 0;
+        border: none;
+        outline: none;
+        transition: var(--transition-all);
+        pointer-events: auto;
+        cursor: pointer;
       }
     }
   }

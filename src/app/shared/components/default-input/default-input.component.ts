@@ -10,9 +10,12 @@ export class DefaultInputComponent implements OnChanges {
   @Input() id?: string;
   @Input() value?: any;
   @Input() placeholder?: string;
+
   @Input() label?: string;
+
   @Input() iconName?: string;
   @Input() iconPosition: string = 'left';
+
   @Input() disabled: boolean = false;
 
   public iconStyle: string = 'light';

@@ -1,6 +1,6 @@
 <div class="input-control {{ disabled ? 'disabled' : null }}">
+  <label class="size-l" for="{{ id }}">{{ label }}</label>
   <div class="input-control__container">
-    <label class="size-l" for="{{ id }}">{{ label }}</label>
     <app-svg-icon
       *ngIf="iconName != null"
       class="input-control__icon {{ iconPosition }}"
