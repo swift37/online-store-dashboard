@@ -24,10 +24,12 @@ $color-black: #1c1d22;
   --border-input: 1px solid #cfd3d4;
   --border-button: 2px solid var(--color-primary);
 
-  --height-input: 58px;
+  --height-input: 52px;
+  --height-input-labeled: 58px;
   --height-search: 45px;
 
-  --padding-input: 31px 16px 8px;
+  --padding-input: 8px 16px;
+  --padding-input-labeled: 31px 16px 8px;
   --padding-button: 17px 16px;
   --padding-dropdown: 20px 16px;
 
