@@ -49,7 +49,7 @@
     }
 
     &:disabled {
-      background-color: #f2f4f5;
+      background-color: #f2f4f5 !important;
 
       &::placeholder {
         color: var(--color-black-60);
@@ -139,7 +139,7 @@
       cursor: pointer;
 
       &:last-of-type {
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px !important;
 
         .icon {
           bottom: unset;
@@ -196,6 +196,43 @@
         transition: var(--transition-all);
         pointer-events: auto;
         cursor: pointer;
+      }
+    }
+  }
+
+  &.filled-style {
+    input {
+      border: none !important;
+      background-color: rgba($color: #eff1f9, $alpha: 60%);
+
+      &:disabled {
+        border: var(--border-input) !important;
+      }
+    }
+
+    &:focus-within {
+      input {
+        background-color: rgba($color: #e9ecf8, $alpha: 90%);
+      }
+    }
+
+    &.failed {
+      input {
+        background-color: rgba($color: #fcf3f2, $alpha: 70%);
+      }
+    }
+
+    &.validated {
+      input {
+        background-color: rgba($color: #f0f9f6, $alpha: 70%);
+      }
+    }
+
+    &:has(input:-webkit-autofill) {
+      input:-webkit-autofill {
+        background-color: rgba($color: #e9ecf8, $alpha: 90%);
+        background-clip: border-box;
+        -webkit-background-clip: border-box;
       }
     }
   }
