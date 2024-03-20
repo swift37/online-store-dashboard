@@ -22,7 +22,7 @@
 
   label {
     position: block;
-    margin-bottom: 4px;
+    margin: 0 0 4px 4px;
     z-index: 10;
     color: var(--color-black-70);
     transition: var(--transition-all);
@@ -175,6 +175,7 @@
       position: absolute;
       top: 8px;
       left: 16px;
+      margin: 0;
     }
 
     input {
@@ -183,20 +184,6 @@
 
     .input-control__spin {
       right: 8px;
-
-      button {
-        position: relative;
-        width: 100%;
-        height: 19.5px;
-        background-color: #dde2e5;
-        color: #83898c;
-        border-radius: 4px 4px 0 0;
-        border: none;
-        outline: none;
-        transition: var(--transition-all);
-        pointer-events: auto;
-        cursor: pointer;
-      }
     }
   }
 
