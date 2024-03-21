@@ -1,0 +1,242 @@
+@import "../../../styles/mixins";
+
+.custom-control {
+  $root: &;
+  $controls: input, select, textarea;
+
+  position: relative;
+  @include flex-center(vertical, true);
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+
+  &__container {
+    position: relative;
+    width: 100%;
+    height: var(--height-input);
+  }
+
+  label {
+    position: block;
+    margin: 0 0 4px 4px;
+    z-index: 10;
+    color: var(--color-black-70);
+    transition: var(--transition-all);
+  }
+
+  #{$controls} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: var(--padding-input);
+    border: var(--border-input);
+    border-radius: var(--border-radius-default);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    line-height: 19px;
+    color: var(--color-black-70);
+    background-color: transparent;
+    z-index: 5;
+    outline: none;
+    transition: var(--transition-all);
+
+    &::placeholder {
+      color: var(--color-black-40);
+    }
+
+    &:disabled {
+      background-color: #f2f4f5 !important;
+
+      &::placeholder {
+        color: var(--color-black-60);
+      }
+    }
+
+    &:-webkit-autofill {
+      background-color: rgba($color: #e9ecf8, $alpha: 90%);
+      background-clip: border-box;
+      -webkit-background-clip: border-box;
+    }
+  }
+
+  &__icon {
+    @include absolute-center(vertical);
+    @include square(24px);
+    color: var(--color-black-70);
+    z-index: 10;
+
+    &.left {
+      left: 16px;
+    }
+
+    &.right {
+      right: 16px;
+    }
+  }
+
+  &__message {
+    color: var(--color-black-40);
+    transition: var(--transition-all);
+    z-index: 5;
+  }
+
+  &__check {
+    @include flex-center(both);
+    @include absolute-center(vertical);
+    @include circle(20px);
+    right: 16px;
+    color: var(--color-action-success);
+    background-color: rgba($color: #32936f, $alpha: 24%);
+    z-index: 10;
+
+    .icon {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  &.inner-label {
+    #{$root}__container {
+      height: var(--height-input-labeled);
+    }
+
+    label {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      margin: 0;
+    }
+
+    input {
+      padding: var(--padding-input-labeled);
+    }
+  }
+
+  &.filled-style {
+    #{$controls} {
+      border: none !important;
+      background-color: rgba($color: #eff1f9, $alpha: 60%);
+
+      &:disabled {
+        border: var(--border-input) !important;
+      }
+    }
+
+    &:focus-within {
+      #{$controls} {
+        background-color: rgba($color: #e9ecf8, $alpha: 90%);
+      }
+    }
+
+    &.failed {
+      #{$controls} {
+        background-color: rgba($color: #fcf3f2, $alpha: 70%);
+      }
+    }
+
+    &.validated {
+      #{$controls} {
+        background-color: rgba($color: #f0f9f6, $alpha: 70%);
+      }
+    }
+
+    #{$controls}:-webkit-autofill {
+      background-color: rgba($color: #e9ecf8, $alpha: 90%);
+      background-clip: border-box !important;
+      -webkit-background-clip: border-box !important;
+    }
+  }
+
+  &:has(#{&}__icon.left) {
+    label {
+      left: 56px;
+    }
+
+    #{$controls} {
+      padding-left: 56px;
+    }
+  }
+
+  &:has(#{&}__icon.right) {
+    #{$root}__check {
+      right: 50px;
+    }
+
+    label {
+      left: 16px;
+    }
+
+    #{$controls} {
+      padding-left: 16px;
+      padding-right: 80px;
+    }
+  }
+
+  &:focus-within {
+    label {
+      color: var(--color-primary-100);
+    }
+    #{$controls} {
+      border-color: var(--color-primary-100);
+    }
+  }
+
+  &.filled {
+    label {
+      color: var(--color-black-70);
+    }
+    #{$controls} {
+      border-color: var(--color-black-70);
+    }
+  }
+
+  &.failed {
+    label {
+      color: var(--color-action-fail);
+    }
+    #{$controls} {
+      border-color: var(--color-action-fail);
+    }
+    #{root}_message {
+      color: var(--color-action-fail);
+    }
+  }
+
+  &.validated {
+    label {
+      color: var(--color-action-success);
+    }
+    #{$controls} {
+      border-color: var(--color-action-success);
+    }
+  }
+
+  &:has(input:-webkit-autofill) {
+    label {
+      color: var(--color-primary-100);
+    }
+    #{$controls}:-webkit-autofill {
+      background-clip: text;
+      border-color: var(--color-primary-100);
+      -webkit-text-fill-color: var(--color-black-70);
+      -webkit-background-clip: text;
+    }
+  }
+
+  &.disabled {
+    #{$root}__container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: auto;
+      z-index: 20;
+      border-radius: var(--border-radius-default);
+      background-color: rgba($color: #f2f4f5, $alpha: 30%);
+    }
+  }
+}
