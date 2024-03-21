@@ -3,7 +3,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-default-input',
   templateUrl: './default-input.component.html',
-  styleUrl: './default-input.component.scss',
+  styleUrls: [
+    '../../styles/custom-control.scss',
+    './default-input.component.scss',
+  ],
 })
 export class DefaultInputComponent implements OnChanges {
   @Input() type: string = 'text';

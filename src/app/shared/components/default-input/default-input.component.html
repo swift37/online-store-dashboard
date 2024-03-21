@@ -1,9 +1,9 @@
-<div class="input-control {{ disabled ? 'disabled' : null }} inner-label">
+<div class="custom-control {{ disabled ? 'disabled' : null }} inner-label">
   <label class="size-l" for="{{ id }}">{{ label }}</label>
-  <div class="input-control__container">
+  <div class="custom-control__container">
     <app-svg-icon
       *ngIf="iconName != null"
-      class="input-control__icon {{ iconPosition }}"
+      class="custom-control__icon {{ iconPosition }}"
       [iconName]="iconName"
       [iconStyle]="iconStyle"
     ></app-svg-icon>
@@ -15,14 +15,14 @@
       [disabled]="disabled ? true : null"
       autocomplete="email"
     />
-    <!-- <span class="input-control__check"
+    <!-- <span class="custom-control__check"
       ><app-svg-icon
         iconName="vector"
         iconStyle="light"
         class="icon"
       ></app-svg-icon
     ></span> -->
-    <div class="input-control__spin" *ngIf="type == 'number'">
+    <div class="custom-control__spin" *ngIf="type == 'number'">
       <button (click)="onIncrease()" [disabled]="disabled ? true : null">
         <app-svg-icon
           class="icon"
@@ -39,7 +39,7 @@
       </button>
     </div>
   </div>
-  <span class="input-control__message paragraph size-m"
+  <span class="custom-control__message paragraph size-m"
     >Helper text goes here</span
   >
 </div>
