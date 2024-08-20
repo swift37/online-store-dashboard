@@ -1,0 +1,66 @@
+<div class="summary-page">
+  <header class="summary-page__header">
+    <p class="summary-page__title size-l">Customers Summary</p>
+
+    <app-button
+      class="summary-page__new-entity"
+      color="primary"
+      iconName="fi_plus"
+      iconStyle="feather"
+      size="full-slim"
+      design="filled"
+      (onClick)="addNewCustomer()"
+      >Add a New Customer</app-button
+    >
+  </header>
+
+  <div class="summary-page__cards-group">
+    <app-summary-card
+      class="card"
+      [data]="this.customersSummaryData.slice(0, 3)"
+      [timeSpans]="this.relTimeSpans"
+      iconName="2-user"
+      iconColor="secondary"
+    ></app-summary-card>
+
+    <app-summary-card
+      class="card"
+      [data]="this.customersSummaryData.slice(3, 6)"
+      [timeSpans]="this.relTimeSpans"
+      iconName="bag"
+      iconColor="secondary"
+    ></app-summary-card>
+  </div>
+
+  <app-data-grid
+    *ngIf="this.customers?.length; else emptyState"
+    class="summary-page__data-grid"
+    gridTitle="Customers"
+    [columnDefs]="this.gridColumnDefs"
+    identifierField="id"
+    [data]="this.customers"
+    [paginationOptions]="this.testPaginationOptions"
+  ></app-data-grid>
+
+  <ng-template #emptyState>
+    <div class="summary-page__empty-state">
+      <app-empty-state
+        title="No Customers Yet?"
+        subtitle="Add products to the store and start selling to gain new customers"
+        iconName="2-user"
+        iconStyle="bulk"
+      >
+        <app-button
+          [routerLink]="['/inventory/new-item']"
+          class="summary-page__new-product"
+          color="primary"
+          iconName="fi_plus"
+          iconStyle="feather"
+          size="full-slim"
+          design="filled"
+          >New Product</app-button
+        >
+      </app-empty-state>
+    </div>
+  </ng-template>
+</div>

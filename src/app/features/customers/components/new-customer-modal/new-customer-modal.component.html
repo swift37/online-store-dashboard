@@ -1,0 +1,71 @@
+<form
+  class="new-entity"
+  [formGroup]="this.customerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="form">
+    <div class="form__column">
+      <header class="form__col-header">
+        <p class="form__sub-title paragraph size-l">Customer Information</p>
+      </header>
+
+      <div class="form__details">
+        <app-input
+          class="form__field"
+          type="text"
+          placeholder="Full Name"
+          [filledStyle]="true"
+          formControlName="fullName"
+        ></app-input>
+
+        <app-input
+          class="form__field"
+          type="email"
+          placeholder="Email"
+          [filledStyle]="true"
+          formControlName="email"
+        ></app-input>
+
+        <app-input
+          class="form__field"
+          type="tel"
+          placeholder="Phone Number"
+          [filledStyle]="true"
+          formControlName="phone"
+        ></app-input>
+
+        <app-toggle-switch
+          [id]="'addAddress'"
+          class="form__field"
+          label="Add Address"
+          labelPosition="left"
+          size="medium"
+          formControlName="addAddress"
+        ></app-toggle-switch>
+      </div>
+    </div>
+
+    <div
+      class="form__column"
+      *ngIf="this.customerForm.controls.address"
+      @column
+    >
+      <div class="form__details">
+        <app-address-form formGroupName="address"></app-address-form>
+      </div>
+    </div>
+  </div>
+
+  <div class="new-entity__buttons">
+    <app-button
+      type="button"
+      class="new-entity__btn"
+      design="outlined"
+      (onClick)="onCancel()"
+      >Cancel</app-button
+    >
+    <app-button type="submit" class="new-entity__btn" design="filled"
+      >Add</app-button
+    >
+  </div>
+</form>
