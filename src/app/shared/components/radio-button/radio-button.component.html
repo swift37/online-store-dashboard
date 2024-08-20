@@ -1,0 +1,31 @@
+<div class="radio-button">
+  <div class="radio-button__container">
+    <input
+      type="radio"
+      [attr.id]="id"
+      [attr.name]="name"
+      [attr.checked]="checked"
+      [value]="value"
+      [disabled]="disabled ? true : null"
+      (change)="valueChanged($event)"
+      (blur)="touched()"
+    />
+
+    <label
+      *ngIf="label"
+      class="radio-button__label {{ labelPosition }}"
+      [attr.for]="id"
+      >{{ label }}</label
+    >
+  </div>
+
+  <span
+    *ngIf="description"
+    class="radio-button__description paragraph size-m"
+    >{{ description }}</span
+  >
+  <app-control-errors
+    *ngIf="displayErrors && control"
+    [control]="control"
+  ></app-control-errors>
+</div>
