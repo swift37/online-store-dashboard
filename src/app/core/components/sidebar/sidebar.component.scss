@@ -1,0 +1,234 @@
+@import "../../../../styles/mixins";
+
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 300px;
+  z-index: 1000;
+  transition: all 0.4s ease-in-out;
+
+  &.minimized {
+    width: 88px;
+
+    .sidebar {
+      padding: 16px;
+    }
+
+    .header__toggle {
+      right: -27px;
+      transform: translateY(-50%);
+    }
+
+    .menu__main-links {
+      gap: 12px;
+    }
+
+    .nav-link {
+      padding: 16px;
+
+      &__counter {
+        position: absolute;
+        transform: translate(16px, -15px);
+      }
+    }
+
+    .logout-link {
+      justify-content: center;
+    }
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  height: 100%;
+  width: 100%;
+  padding: 16px 32px;
+  background-color: var(--color-nav-bg);
+  transition: all 0.3s ease-in-out;
+}
+
+.header {
+  position: relative;
+
+  &__content {
+    @include flex-center(vertical);
+    gap: 12px;
+  }
+
+  &__logo {
+    @include square(52px);
+    color: var(--color-primary-50);
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .sub-heading {
+      color: var(--color-black-70);
+      font-weight: 600;
+    }
+
+    .paragraph {
+      color: var(--color-black-50);
+    }
+  }
+
+  &__toggle {
+    @include absolute-center(vertical);
+    right: -43px;
+    transform: translateY(-50%) rotate(180deg);
+    @include flex-center(both);
+    @include circle(25px);
+    background-color: var(--color-primary-50);
+    color: var(--color-nav-bg);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+
+    .icon {
+      @include square(20px);
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+
+  &__main-links,
+  &__bottom-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__main-links {
+    gap: 24px;
+  }
+
+  &__bottom-links {
+    gap: 14px;
+  }
+}
+
+.nav-link {
+  @include flex-center(vertical);
+  gap: 16px;
+  width: 100%;
+  padding: 0 20px;
+  border-radius: var(--border-radius-smooth);
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &__icon-container {
+    @include flex-center(both);
+    position: relative;
+    @include square(24px);
+  }
+
+  &__icon {
+    @include absolute-center(both);
+    @include square(100%);
+    color: var(--color-black-50);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__label {
+    color: var(--color-black-50);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__counter {
+    @include flex-center(both);
+    @include circle(24px);
+    color: var(--color-black-100);
+    background-color: var(--color-secondary-100);
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &.active,
+  &:hover {
+    padding: 16px 20px;
+    background-color: var(--color-primary-100);
+
+    .nav-link__icon,
+    .nav-link__label {
+      color: var(--color-nav-bg);
+    }
+
+    .nav-link__counter {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.tech-iss-link {
+  @include flex-center(vertical);
+  gap: 12px;
+  width: 100%;
+  padding: 11px 16px;
+  color: var(--color-black-100);
+  background-color: rgba($color: #5e6366, $alpha: 10%);
+  border-radius: 16px;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  transition: background 0.3s ease-in-out;
+
+  &__icon {
+    width: 24px;
+  }
+
+  &__label {
+    color: var(--color-black-100);
+  }
+
+  &:hover {
+    background-color: rgba($color: #5e6366, $alpha: 20%);
+  }
+}
+
+.logout-link {
+  @include flex-center(vertical);
+  gap: 8px;
+  width: 100%;
+  padding: 11px;
+  color: var(--color-action-fail);
+  background-color: transparent;
+  border-radius: 16px;
+  margin-top: 10px;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+
+  &__icon {
+    width: 24px;
+  }
+
+  &__label {
+    color: var(--color-action-fail);
+    transition: color 0.3s ease-in-out;
+  }
+
+  &:hover {
+    color: #c95f58;
+
+    &__label {
+      color: #c95f58;
+    }
+  }
+}

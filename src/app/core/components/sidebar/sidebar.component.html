@@ -1,0 +1,102 @@
+<nav class="sidebar">
+  <header class="header">
+    <div class="header__content">
+      <app-svg-icon class="header__logo" iconName="logo"></app-svg-icon>
+
+      <div *ngIf="!minimized" [@text] class="header__title">
+        <span class="sub-heading size-s">Store Panel</span>
+        <span class="paragraph size-l">Developer</span>
+      </div>
+    </div>
+
+    <span class="header__toggle" (click)="toggleSidebar()">
+      <app-svg-icon
+        iconName="fi_chevron-right"
+        iconStyle="feather"
+        class="icon"
+      ></app-svg-icon>
+    </span>
+  </header>
+
+  <div class="menu">
+    <div class="menu__main-links">
+      <a
+        *ngFor="let link of this.links; index as i"
+        [routerLink]="link.routerLink"
+        routerLinkActive="active"
+        class="nav-link"
+        (mouseenter)="toggleLink(i, true)"
+        (mouseleave)="toggleLink(i, false)"
+      >
+        <div class="nav-link__icon-container">
+          <app-svg-icon
+            *ngIf="
+              !link.hovered && !this.isActive(link.routerLink);
+              else bulkIconTmpl
+            "
+            [iconName]="link.iconName"
+            iconStyle="light"
+            class="nav-link__icon"
+            @linkIcon
+          ></app-svg-icon>
+
+          <ng-template #bulkIconTmpl>
+            <app-svg-icon
+              [iconName]="link.iconName"
+              iconStyle="bulk"
+              class="nav-link__icon"
+              @linkIcon
+            ></app-svg-icon>
+          </ng-template>
+        </div>
+
+        <span
+          *ngIf="!minimized"
+          [@text]
+          class="nav-link__label paragraph size-m"
+          >{{ link.label }}</span
+        >
+
+        <label *ngIf="link.counter" class="nav-link__counter size-l">{{
+          link.counter
+        }}</label>
+      </a>
+    </div>
+
+    <div class="menu__bottom-links">
+      <a
+        [routerLink]="['/routePath']"
+        routerLinkActive="router-link-active"
+        class="tech-iss-link"
+      >
+        <app-svg-icon
+          iconName="fi_headphones"
+          iconStyle="feather"
+          class="tech-iss-link__icon"
+        ></app-svg-icon>
+
+        <span
+          *ngIf="!minimized"
+          [@text]
+          class="tech-iss-link__label paragraph size-m"
+          >Technical Issues</span
+        >
+      </a>
+
+      <a class="logout-link" (click)="onLogout()">
+        <app-svg-icon
+          iconName="logout"
+          iconStyle="bulk"
+          class="logout-link__icon"
+        ></app-svg-icon>
+
+        <span
+          *ngIf="!minimized"
+          [@text]
+          class="logout-link__label paragraph size-m"
+          >Logout</span
+        >
+      </a>
+    </div>
+  </div>
+</nav>
