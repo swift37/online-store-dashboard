@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { SvgIconService } from '../../services/svg-icon.service';
@@ -9,9 +15,11 @@ import { Observable, map, shareReplay } from 'rxjs';
   styleUrl: './svg-icon.component.scss',
   template: `<span [innerHTML]="sanitizedSvgContent"></span>`,
 })
-export class SvgIconComponent implements OnInit {
-  @Input() public iconName?: string;
-  @Input() public iconStyle?: string;
+export class SvgIconComponent implements OnChanges {
+  @Input({ required: true })
+  public iconName!: string;
+  @Input()
+  public iconStyle?: string;
 
   public sanitizedSvgContent?: SafeHtml;
 
@@ -22,15 +30,11 @@ export class SvgIconComponent implements OnInit {
     private svgIconService: SvgIconService
   ) {}
 
-  public ngOnInit(): void {
-    this.loadSvg();
-  }
-
   private loadSvg(): void {
-    // Exit from the method in case of icon absence
-    if (!this.iconName) return;
     // Construct your path to an icon
-    const svgPath = `../../../../assets/icons/svg/${this.iconStyle}/${this.iconName}.svg`;
+    const stylePath: string = this.iconStyle ? this.iconStyle + '/' : '';
+    const svgPath =
+      `../../../../assets/icons/svg/${stylePath}` + `${this.iconName}.svg`;
 
     // Check if the icon is already cached
     if (!this.svgIconService.svgIconMap.has(svgPath)) {
@@ -60,4 +64,16 @@ export class SvgIconComponent implements OnInit {
       error: (error) => console.error(`Error loading SVG`, error),
     });
   }
+
+  //---------- Lifecycle methods start ----------
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['iconName']?.currentValue != changes['iconName']?.previousValue ||
+      changes['iconStyle']?.currentValue != changes['iconStyle']?.previousValue
+    )
+      this.loadSvg();
+  }
+
+  //---------- Lifecycle methods end ----------
 }

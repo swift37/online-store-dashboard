@@ -13,4 +13,8 @@ span {
     color: inherit;
     // fill: currentColor;
   }
+
+  &::ng-deep path {
+    stroke-width: inherit !important;
+  }
 }
