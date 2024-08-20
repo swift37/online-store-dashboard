@@ -1,0 +1,53 @@
+<ng-container *ngIf="data$ | async as data">
+  <div class="login-page">
+    <header class="login-page__header">
+      <app-svg-icon class="login-page__logo" iconName="logo"></app-svg-icon>
+    </header>
+
+    <div class="login-page__form">
+      <form class="form" [formGroup]="this.loginForm" (ngSubmit)="onSubmit()">
+        <header class="form__header">
+          <app-svg-icon class="form__logo" iconName="logo"></app-svg-icon>
+
+          <div class="form__text">
+            <p class="form__text--title sub-heading size-s">Welcome back!</p>
+
+            <p class="form__text--sub-title paragraph size-m">
+              Login to your account
+            </p>
+          </div>
+        </header>
+
+        <div class="form__fields">
+          <app-input
+            class="form__field"
+            type="text"
+            placeholder="Username or Email"
+            iconName="message"
+            iconStyle="light"
+            [filledStyle]="true"
+            formControlName="usernameOrEmail"
+          ></app-input>
+
+          <app-password-input
+            class="form__field"
+            placeholder="Password"
+            [filledStyle]="true"
+            formControlName="password"
+          ></app-password-input>
+        </div>
+
+        <span *ngIf="data.backendErrors">{{ data.backendErrors }}</span>
+
+        <app-button
+          class="form__submit-btn"
+          type="submit"
+          color="primary"
+          design="filled"
+          [disabled]="data.submitting"
+          >Login</app-button
+        >
+      </form>
+    </div>
+  </div>
+</ng-container>
