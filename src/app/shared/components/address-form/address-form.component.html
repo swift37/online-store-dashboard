@@ -1,0 +1,147 @@
+<div class="address-form" [formGroup]="this.addressForm">
+  <header class="address-form__header">
+    <p class="address-form__title paragraph size-l">Shipping Address</p>
+  </header>
+
+  <div class="address-form__fields-group" formGroupName="shippingAddress">
+    <app-select
+      class="address-form__field"
+      placeholder="Country"
+      [options]="this.countries"
+      [settings]="this.selectSettings"
+      [withSearch]="true"
+      [filledStyle]="true"
+      formControlName="country"
+      (onChange)="onCountryChange(false)"
+    ></app-select>
+
+    <div class="address-form__field">
+      <app-select
+        class="control"
+        placeholder="State"
+        [options]="this.states"
+        [settings]="this.selectSettings"
+        [withSearch]="true"
+        [filledStyle]="true"
+        formControlName="state"
+        (onChange)="onStateChange(false)"
+      ></app-select>
+
+      <app-input
+        class="control"
+        type="text"
+        placeholder="Zip / Postal Code"
+        [filledStyle]="true"
+        formControlName="code"
+      ></app-input>
+    </div>
+
+    <app-select
+      class="address-form__field"
+      placeholder="City"
+      [options]="this.cities"
+      [settings]="this.citySelectSettings"
+      [withSearch]="true"
+      [filledStyle]="true"
+      formControlName="city"
+    ></app-select>
+
+    <div class="address-form__field details">
+      <app-input
+        class="control"
+        type="text"
+        placeholder="Building No., Street Address"
+        [filledStyle]="true"
+        formControlName="details"
+      ></app-input>
+
+      <app-input
+        class="control"
+        type="text"
+        placeholder="Apt."
+        [filledStyle]="true"
+        formControlName="apartment"
+      ></app-input>
+    </div>
+  </div>
+
+  <header class="address-form__header">
+    <p class="address-form__title paragraph size-l">Billing Address</p>
+
+    <app-toggle-switch
+      [id]="'addBillingAddress'"
+      label="Same as Shipping Address"
+      labelPosition="left"
+      size="medium"
+      [displayErrors]="false"
+      formControlName="sameBillingAddress"
+    ></app-toggle-switch>
+  </header>
+
+  <div
+    class="address-form__fields-group"
+    *ngIf="!this.addressForm.get('sameBillingAddress')?.value"
+    formGroupName="billingAddress"
+    @form
+  >
+    <app-select
+      class="address-form__field"
+      placeholder="Country"
+      [options]="this.countries"
+      [settings]="this.selectSettings"
+      [withSearch]="true"
+      [filledStyle]="true"
+      formControlName="country"
+      (onChange)="onCountryChange(true)"
+    ></app-select>
+
+    <div class="address-form__field">
+      <app-select
+        class="control"
+        placeholder="State"
+        [options]="this.states"
+        [settings]="this.selectSettings"
+        [withSearch]="true"
+        [filledStyle]="true"
+        formControlName="state"
+        (onChange)="onStateChange(true)"
+      ></app-select>
+
+      <app-input
+        class="control"
+        type="text"
+        placeholder="Zip / Postal Code"
+        [filledStyle]="true"
+        formControlName="code"
+      ></app-input>
+    </div>
+
+    <app-select
+      class="address-form__field"
+      placeholder="City"
+      [options]="this.cities"
+      [settings]="this.citySelectSettings"
+      [withSearch]="true"
+      [filledStyle]="true"
+      formControlName="city"
+    ></app-select>
+
+    <div class="address-form__field details">
+      <app-input
+        class="control"
+        type="text"
+        placeholder="Building No., Street Address"
+        [filledStyle]="true"
+        formControlName="details"
+      ></app-input>
+
+      <app-input
+        class="control"
+        type="text"
+        placeholder="Apt."
+        [filledStyle]="true"
+        formControlName="apartment"
+      ></app-input>
+    </div>
+  </div>
+</div>
