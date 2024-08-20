@@ -1,0 +1,166 @@
+@import "../../../../styles/mixins";
+
+:host {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 24px 21px;
+  background-color: #fff;
+  border-radius: var(--border-radius-smooth);
+  box-shadow: 0 4px 32px 0 rgba(61, 70, 112, 0.08);
+  z-index: 100;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.date-filters-popup {
+  @include flex-center(vertical, true);
+  gap: 12px;
+  width: 360px;
+  height: fit-content;
+
+  &__title {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    line-height: 24px;
+    color: var(--color-black-100);
+    margin-bottom: 9px;
+  }
+
+  &__filters-group {
+    @include flex-center(vertical, true);
+    gap: 16px;
+  }
+
+  &__default-values {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: start;
+    gap: 12px;
+  }
+
+  &__divider {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #f0f1f5;
+  }
+
+  &__apply-btn {
+    width: 100%;
+    height: 36px;
+    font-size: 14px;
+    line-height: auto;
+  }
+}
+
+.radio-btn {
+  align-self: flex-start;
+}
+
+.date-range-picker {
+  @include flex-center(vertical, true);
+  gap: 16px;
+
+  &__container {
+    display: flex;
+    overflow: hidden;
+  }
+
+  &__picker {
+    @include flex-center(vertical, true);
+    gap: 16px;
+  }
+
+  &__calendar {
+    @include flex-center(vertical, true);
+  }
+
+  &__year-month {
+    @include flex-center(vertical);
+    gap: 24px;
+    padding: 12px 24px;
+  }
+
+  &__date {
+    @include flex-center(both);
+    flex-wrap: wrap;
+    background-color: var(--color-main-bg);
+  }
+}
+
+.calendar-cell {
+  @include flex-center(both);
+  position: relative;
+  @include square(40px);
+  margin: 4px;
+  font-family: "Roboto", sans-serif;
+  font-weight: var(--font-weight-regular);
+  text-align: center;
+  z-index: 15;
+
+  &.caption {
+    color: var(--color-black-30);
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  &.body {
+    color: var(--color-black-80);
+    font-size: 16px;
+    line-height: 24px;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      border-radius: 50px;
+      box-shadow: 0 0 0 2px var(--color-primary-100) inset;
+    }
+
+    &.today {
+      border-radius: 50px;
+      background-color: #fff;
+    }
+
+    &.range::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      width: 48px;
+      height: 100%;
+      background-color: rgb(from var(--color-primary-100) r g b / 8%);
+      z-index: 5;
+    }
+
+    &.range-start,
+    &.range-end {
+      color: #e1e2e9;
+
+      &::before {
+        content: "";
+        position: absolute;
+        @include square(100%);
+        border-radius: 50px;
+        background-color: var(--color-primary-100);
+        z-index: -1;
+      }
+    }
+
+    &.range-start::after {
+      left: 0;
+      width: 44px;
+      border-radius: 50px 0 0 50px;
+    }
+
+    &.range-end::after,
+    &.range-preview-end::after {
+      left: unset;
+      right: 0;
+      width: 44px;
+      border-radius: 0 50px 50px 0;
+    }
+  }
+}

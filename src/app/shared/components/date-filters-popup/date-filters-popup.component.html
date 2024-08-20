@@ -1,0 +1,108 @@
+<div class="date-filters-popup">
+  <p class="date-filters-popup__title">{{ this.title }}</p>
+
+  <form
+    class="date-filters-popup__filters-group"
+    [formGroup]="this.filtersForm"
+    (ngSubmit)="onApply()"
+  >
+    <div class="date-filters-popup__default-values">
+      <app-radio-button
+        *ngFor="let opt of timeSpanOptions; index as i"
+        class="radio-btn"
+        name="dateRange"
+        [id]="'dateFilterOpt' + i"
+        [label]="opt.label"
+        [value]="opt.timeSpan"
+        [displayErrors]="false"
+        [formControlName]="this.controlName"
+        (onChange)="this.pickerIsOpen = false"
+      ></app-radio-button>
+    </div>
+
+    <hr class="date-filters-popup__divider" />
+
+    <div class="date-range-picker">
+      <app-radio-button
+        class="radio-btn"
+        name="dateRange"
+        label="Date Range"
+        [id]="'dateFilterOptRange'"
+        (onChange)="this.pickerIsOpen = true"
+      ></app-radio-button>
+
+      <div class="date-range-picker__container">
+        <div
+          *ngIf="this.pickerIsOpen"
+          class="date-range-picker__picker"
+          @datePicker
+        >
+          <app-tab-group
+            [activeTabIndex]="this.indicatorStatus"
+            [filledStyle]="true"
+            type="indicator"
+          >
+            <app-tab label="From"></app-tab>
+            <app-tab label="To"></app-tab>
+          </app-tab-group>
+
+          <div class="date-range-picker__calendar">
+            <div class="date-range-picker__year-month">
+              <app-mini-select
+                [options]="this.yearsSelectOptions"
+                [settings]="this.yearSelectSettings"
+                [value]="this.initDate.getFullYear()"
+                [enlargedText]="true"
+                (onChange)="changeCalendarMonth($event.selectedOptions[0])"
+                design="dark-transparent"
+              ></app-mini-select>
+
+              <app-mini-select
+                [options]="this.monthSelectOptions"
+                [settings]="this.monthSelectSettings"
+                [value]="this.initDate.getMonth()"
+                [enlargedText]="true"
+                (onChange)="
+                  changeCalendarMonth(undefined, $event.selectedOptions[0])
+                "
+                design="dark-transparent"
+              ></app-mini-select>
+            </div>
+
+            <div class="date-range-picker__date">
+              <div *ngFor="let day of daysOfWeek" class="calendar-cell caption">
+                {{ this.day }}
+              </div>
+
+              <div
+                *ngFor="let day of calendar"
+                class="calendar-cell"
+                [ngClass]="{
+                  body: day,
+                  today: todayCheck(day),
+                  range: inSelectedRange(day) || inRangePreview(day),
+                  'range-start': isRangeStart(day),
+                  'range-end': isRangeEnd(day),
+                  'range-preview-end': isRangePreviewEnd(day)
+                }"
+                (mouseenter)="previewRange(day)"
+                (click)="selectDate(day)"
+              >
+                {{ day ? day.getDate() : "" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-button
+        class="date-filters-popup__apply-btn"
+        type="submit"
+        design="filled"
+        color="primary"
+        size="full-slim"
+        >Apply</app-button
+      >
+    </div>
+  </form>
+</div>
