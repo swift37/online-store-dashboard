@@ -1,0 +1,12 @@
+:host:not(:first-of-type) {
+  margin-top: -4px;
+}
+
+.control-error {
+  display: block;
+  position: relative;
+  color: var(--color-action-fail);
+  transition: var(--transition-all);
+  overflow: hidden;
+  z-index: 5;
+}
