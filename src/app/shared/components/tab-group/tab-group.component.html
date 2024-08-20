@@ -1,0 +1,27 @@
+<div
+  class="tabs-group {{ this.iconPosition }}-icons"
+  [ngClass]="{
+    'filled-style': filledStyle,
+    'indicator-style': type == 'indicator'
+  }"
+>
+  <div class="tabs-group__container">
+    <div
+      class="tabs-group__tab paragraph size-l"
+      [ngClass]="{ active: tab == activeTab }"
+      *ngFor="let tab of tabs"
+      (click)="type == 'tab-group' && activateTab(tab)"
+    >
+      <app-svg-icon
+        *ngIf="tab.iconName"
+        class="tabs-group__tab-icon"
+        [iconName]="tab.iconName"
+        [iconStyle]="this.iconStyle"
+      >
+      </app-svg-icon>
+      <span>{{ tab.label }}</span>
+    </div>
+  </div>
+
+  <ng-template *ngTemplateOutlet="activeTab.templateRef"></ng-template>
+</div>
