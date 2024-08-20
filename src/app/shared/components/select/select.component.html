@@ -1,0 +1,112 @@
+<div
+  class="custom-control"
+  [ngClass]="{
+    disabled: disabled,
+    filled: !control?.validator && !control?.asyncValidator && control?.touched,
+    validated:
+      (control?.validator || control?.asyncValidator) &&
+      control?.valid &&
+      control?.touched,
+    failed: control?.invalid && control?.touched,
+    slim: slim,
+    'open-upward': openUpward,
+    'emphasized-text': emphasizedText,
+    'inner-label': innerLabel,
+    'filled-style': filledStyle,
+    'hide-check': hideCheck
+  }"
+>
+  <label *ngIf="label" class="custom-control__label size-l">{{
+    this.label
+  }}</label>
+
+  <div class="custom-control__container">
+    <app-svg-icon
+      *ngIf="this.iconName != null"
+      class="custom-control__icon left"
+      [iconName]="this.iconName"
+      [iconStyle]="this.iconStyle"
+    ></app-svg-icon>
+
+    <button
+      class="custom-control__control"
+      type="button"
+      [ngClass]="{
+        placeholder: !this.value || !this.value.length,
+        opened: isDropdownOpen
+      }"
+      [attr.id]="id"
+      [disabled]="this.disabled ? true : null"
+      (click)="touched(); toggleDropdown()"
+    >
+      <ng-template
+        [ngIf]="this.value && this.currentDisplayValue"
+        [ngIfElse]="placeholderTmpl"
+        #valueTmpl
+      >
+        {{ this.currentDisplayValue }}
+      </ng-template>
+
+      <ng-template #placeholderTmpl>
+        {{ this.placeholder }}
+      </ng-template>
+    </button>
+
+    <ng-template [ngIf]="isDropdownOpen" #dropdown>
+      <div class="custom-control__dropdown" @dropdown>
+        <app-search-input
+          *ngIf="this.withSearch"
+          class="custom-control__search"
+          [formControl]="this.searchControl"
+        ></app-search-input>
+
+        <cdk-virtual-scroll-viewport
+          class="custom-control__dropdown-menu"
+          [ngClass]="{
+            overflowed: this.options.length > this.maxVisibleOptions
+          }"
+          [minBufferPx]="slim ? -17 : -20"
+          [maxBufferPx]="slim ? -17 : -20"
+          [itemSize]="slim ? 34 : 40"
+          [style.height.px]="this.visibleOptionsNumber * (slim ? 34 : 40)"
+          [style.max-height.px]="this.maxVisibleOptions * (slim ? 34 : 40)"
+        >
+          <div
+            *ngIf="!this.options.length"
+            class="custom-control__dropdown-item paragraph size-l"
+          >
+            No results found...
+          </div>
+
+          <label
+            *cdkVirtualFor="let option of options; index as i"
+            class="custom-control__dropdown-item paragraph size-l"
+            [for]="'opt' + option?.[this.settings.idPropKey]"
+            (click)="multiple ? null : onSelect(option, i)"
+          >
+            <app-checkbox
+              *ngIf="this.multiple"
+              class="checkbox {{ this.checkboxPosition }}"
+              [id]="'opt' + option?.[this.settings.idPropKey]"
+              [value]="this.selectedIndexes.includes(i)"
+              (click)="onMultiSelect(option, i, $event)"
+            ></app-checkbox>
+            {{ option?.[this.settings.displayPropKey] }}
+          </label>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </ng-template>
+
+    <span
+      *ngIf="this.control?.valid && this.control?.touched"
+      class="custom-control__check"
+      ><app-svg-icon
+        iconName="vector"
+        iconStyle="light"
+        class="icon"
+      ></app-svg-icon
+    ></span>
+  </div>
+
+  <app-control-errors *ngIf="control" [control]="control"></app-control-errors>
+</div>
