@@ -1,0 +1,53 @@
+@import "../../../../styles/mixins";
+
+:host {
+  display: block;
+  width: 375px;
+  height: auto;
+}
+
+.custom-control {
+  $root: &;
+
+  &__container {
+    height: var(--height-search);
+  }
+
+  &__icon {
+    @include square(20px);
+  }
+
+  input {
+    border-radius: var(--border-radius-default);
+    padding: var(--padding-search) !important;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+      appearance: none;
+    }
+  }
+
+  &.slim {
+    #{$root}__container {
+      height: 30px;
+    }
+
+    input {
+      height: inherit !important;
+      border-radius: 4px;
+      border-color: #cfd3d4;
+      font-size: 12px !important;
+      font-weight: 400 !important;
+      line-height: 15px !important;
+    }
+  }
+
+  &:focus-within {
+    input {
+      border-color: #5e6366 !important;
+    }
+  }
+}

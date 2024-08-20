@@ -1,0 +1,20 @@
+<div class="custom-control" [class.slim]="slimStyle">
+  <div class="custom-control__container">
+    <app-svg-icon
+      class="custom-control__icon left"
+      iconName="search"
+      iconStyle="light"
+    ></app-svg-icon>
+
+    <input
+      class="custom-control__control"
+      type="search"
+      [attr.id]="id"
+      [value]="value"
+      [attr.placeholder]="placeholder"
+      [disabled]="disabled ? true : null"
+      (input)="onChange($event)"
+      (blur)="touched()"
+    />
+  </div>
+</div>
