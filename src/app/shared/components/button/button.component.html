@@ -1,0 +1,16 @@
+<button
+  [type]="type"
+  [attr.id]="id"
+  class="custom-button {{ design }} {{ color }} {{ size }}"
+  (click)="onClickButton($event)"
+  [disabled]="disabled"
+>
+  <app-svg-icon
+    *ngIf="iconName != null"
+    class="icon {{ iconPosition }}"
+    [iconName]="iconName"
+    [iconStyle]="iconStyle"
+  ></app-svg-icon>
+
+  <ng-content></ng-content>
+</button>

@@ -1,0 +1,165 @@
+@import "../../../../styles/mixins";
+
+:host {
+  display: block;
+  position: relative;
+  width: 375px;
+  height: var(--height-button);
+  font-size: 20px;
+  font-weight: var(--font-weight-regular);
+  line-height: 24px;
+
+  &:has(.full-slim),
+  &:has(.half-slim) {
+    height: var(--height-button-slim);
+  }
+}
+
+.custom-button {
+  $root: &;
+
+  @include flex-center(both, false, true);
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: var(--padding-button);
+  font-family: "Inter", sans-serif;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  border-radius: var(--border-radius-smooth);
+  z-index: 5;
+  border: none;
+  outline: none;
+  transition: var(--transition-all);
+  cursor: pointer;
+
+  .icon {
+    @include square(24px);
+    transition: var(--transition-all);
+    z-index: 10;
+  }
+
+  &.full,
+  &.full-slim {
+    width: 100%;
+  }
+
+  &.half,
+  &.half-slim {
+    width: 50%;
+  }
+
+  &.outlined {
+    &.primary {
+      color: var(--color-primary-100);
+      box-shadow: 0 0 0 2px var(--color-primary-100) inset;
+
+      .icon {
+        color: var(--color-primary-100);
+      }
+
+      &:hover {
+        color: #5b6ec6;
+        box-shadow: 0 0 0 2px #5b6ec6 inset;
+
+        .icon {
+          color: #5b6ec6;
+        }
+      }
+    }
+
+    &.green {
+      color: var(--color-action-success);
+      box-shadow: 0 0 0 2px var(--color-action-success) inset;
+
+      .icon {
+        color: var(--color-action-success);
+      }
+
+      &:hover {
+        color: #458b71;
+        box-shadow: 0 0 0 2px #458b71 inset;
+
+        .icon {
+          color: #458b71;
+        }
+      }
+    }
+
+    &.danger {
+      color: var(--color-action-fail);
+      box-shadow: 0 0 0 2px var(--color-action-fail) inset;
+
+      .icon {
+        color: var(--color-action-fail);
+      }
+
+      &:hover {
+        color: #c95f58;
+        box-shadow: 0 0 0 2px #c95f58 inset;
+
+        .icon {
+          color: #c95f58;
+        }
+      }
+    }
+  }
+
+  &.filled {
+    color: #fff;
+    box-shadow: none;
+    transition: box-shadow 0.2s ease-in-out;
+
+    .icon {
+      color: #fff;
+    }
+
+    &:hover {
+      box-shadow: 0px 0px 25px 20px rgba(0, 0, 0, 0.27) inset;
+    }
+
+    &.primary {
+      background-color: var(--color-primary-100);
+
+      &:hover {
+        background-color: #5b6ec6;
+      }
+    }
+
+    &.green {
+      background-color: var(--color-action-success);
+
+      &:hover {
+        background-color: #458b71;
+      }
+    }
+
+    &.danger {
+      background-color: var(--color-action-fail);
+
+      &:hover {
+        background-color: #c95f58;
+      }
+    }
+  }
+
+  &.full-slim.filled:hover,
+  &.half-slim.filled:hover {
+    box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.27) inset;
+  }
+
+  &:has(.icon.right) {
+    & {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &:disabled {
+    opacity: 60%;
+    pointer-events: none;
+  }
+}
