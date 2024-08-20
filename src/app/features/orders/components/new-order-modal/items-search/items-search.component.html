@@ -1,0 +1,37 @@
+<div class="items-search">
+  <app-search-input
+    class="items-search__bar"
+    placeholder="Search product name"
+    formControlName="searchControl"
+    (click)="toggleDropdown()"
+  ></app-search-input>
+
+  <ng-template [ngIf]="this.isDropdownOpen" #dropdown>
+    <div class="items-search__dropdown" @dropdown>
+      <cdk-virtual-scroll-viewport
+        class="items-search__dropdown-menu"
+        [ngClass]="{
+          overflowed: this.availableItems.length > this.maxVisibleOptNumber
+        }"
+        itemSize="62"
+        [style.height.px]="this.visibleOptNumber * 70 - 8"
+        [style.max-height.px]="this.maxVisibleOptNumber * 70 - 8"
+      >
+        <div
+          *ngIf="!this.availableItems.length"
+          class="items-search__dropdown-empty paragraph size-l"
+        >
+          No results found...
+        </div>
+
+        <app-order-line
+          *cdkVirtualFor="let item of availableItems; index as i"
+          class="items-search__dropdown-item"
+          type="add-item"
+          [content]="item"
+          (added)="onSelect(item)"
+        ></app-order-line>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </ng-template>
+</div>

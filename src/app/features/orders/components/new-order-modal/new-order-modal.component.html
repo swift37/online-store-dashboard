@@ -1,0 +1,207 @@
+<form class="new-entity" [formGroup]="this.orderForm" (ngSubmit)="onSubmit()">
+  <div class="form">
+    <div class="form__column">
+      <header class="form__col-header">
+        <p class="form__sub-title paragraph size-l">Order Details</p>
+
+        <app-toggle-switch
+          [id]="'newUserCheck'"
+          label="New Customer"
+          labelPosition="left"
+          size="medium"
+          formControlName="newUser"
+        ></app-toggle-switch>
+      </header>
+
+      <div class="form__details" @form>
+        <app-select
+          *ngIf="!this.orderForm.controls.newUser.value"
+          class="form__field"
+          placeholder="Select Customer"
+          [options]="[
+            {
+              id: 0,
+              label: 'Option'
+            }
+          ]"
+          [settings]="{ idPropKey: 'id', displayPropKey: 'label' }"
+          [filledStyle]="true"
+          formControlName="userId"
+          @control
+        ></app-select>
+
+        <app-toggle-switch
+          *ngIf="!this.orderForm.controls.newUser.value"
+          [id]="'useUsersData'"
+          class="form__field"
+          label="Use User's Name & Email"
+          size="medium"
+          formControlName="useUsersData"
+        ></app-toggle-switch>
+
+        <app-input
+          *ngIf="
+            this.orderForm.controls.newUser.value ||
+            !this.orderForm.controls.useUsersData.value
+          "
+          class="form__field"
+          type="text"
+          placeholder="Full Name"
+          [filledStyle]="true"
+          formControlName="fullName"
+          @control
+        ></app-input>
+
+        <app-input
+          *ngIf="
+            this.orderForm.controls.newUser.value ||
+            !this.orderForm.controls.useUsersData.value
+          "
+          class="form__field"
+          type="email"
+          placeholder="Email"
+          [filledStyle]="true"
+          formControlName="email"
+          @control
+        ></app-input>
+
+        <app-input
+          class="form__field"
+          type="tel"
+          placeholder="Phone Number"
+          [filledStyle]="true"
+          formControlName="phone"
+        ></app-input>
+
+        <div class="form__field">
+          <app-select
+            class="control"
+            placeholder="Payment Method"
+            [options]="[
+              {
+                id: 0,
+                label: 'Option'
+              }
+            ]"
+            [settings]="{ idPropKey: 'id', displayPropKey: 'label' }"
+            [filledStyle]="true"
+            formControlName="paymentMethod"
+          ></app-select>
+
+          <app-select
+            class="control"
+            placeholder="Order Type"
+            [options]="[
+              {
+                id: 0,
+                label: 'Option'
+              }
+            ]"
+            [settings]="{ idPropKey: 'id', displayPropKey: 'label' }"
+            [filledStyle]="true"
+          ></app-select>
+        </div>
+
+        <div class="form__field date-time">
+          <app-input
+            class="control"
+            type="date"
+            label="Order Date & Time"
+            [filledStyle]="true"
+            formControlName="date"
+          ></app-input>
+
+          <app-input
+            class="control"
+            type="time"
+            label=" "
+            [filledStyle]="true"
+            formControlName="time"
+          ></app-input>
+        </div>
+
+        <app-select
+          class="form__field"
+          label="Order Status"
+          [options]="[
+            {
+              id: 0,
+              label: 'Option'
+            }
+          ]"
+          [settings]="{ idPropKey: 'id', displayPropKey: 'label' }"
+          [filledStyle]="true"
+          formControlName="status"
+        ></app-select>
+
+        <app-text-area
+          class="form__field"
+          placeholder="Order Notes"
+          [filledStyle]="true"
+          formControlName="notes"
+        >
+        </app-text-area>
+      </div>
+    </div>
+
+    <div class="form__column">
+      <div class="form__details">
+        <app-address-form formGroupName="address"></app-address-form>
+      </div>
+    </div>
+
+    <div class="form__column">
+      <header class="form__col-header">
+        <p class="form__sub-title paragraph size-l">Items</p>
+      </header>
+
+      <app-items-search (itemSelected)="addItem($event)"></app-items-search>
+
+      <div
+        class="form__items"
+        *ngIf="this.formItems.length; else noItemsTmpl"
+        formArrayName="items"
+      >
+        <app-order-line-control
+          *ngFor="let item of formItems.controls; index as i"
+          class="item"
+          (quantityChanged)="calculateTotal()"
+          (removed)="removeItem(i)"
+          [formControlName]="i"
+          @item
+        ></app-order-line-control>
+
+        <div class="items-total">
+          <p class="items-total__title paragraph size-l">Total</p>
+          <p class="items-total__value paragraph size-l">
+            ${{ this.itemsTotal }}
+          </p>
+        </div>
+      </div>
+
+      <ng-template #noItemsTmpl>
+        <div class="form__no-items">
+          <app-empty-state
+            title="Add Products to Your Order"
+            subtitle="Search and add products to this order."
+            iconName="bag"
+            iconStyle="bulk"
+          ></app-empty-state>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="new-entity__buttons">
+    <app-button
+      type="button"
+      class="new-entity__btn"
+      design="outlined"
+      (onClick)="onCancel()"
+      >Cancel</app-button
+    >
+    <app-button type="submit" class="new-entity__btn" design="filled"
+      >Create Order</app-button
+    >
+  </div>
+</form>
