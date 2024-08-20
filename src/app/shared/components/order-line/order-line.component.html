@@ -1,0 +1,47 @@
+<div class="order-line">
+  <div class="order-line__container">
+    <span class="order-line__image-container">
+      <img
+        [src]="this.content.imageUrl"
+        onerror="this.src='../../../../assets/icons/svg/placeholder-square-img.svg';"
+        alt="IMG"
+      />
+    </span>
+
+    <div class="order-line__details">
+      <div class="order-line__top-line">
+        <span class="order-line__name paragraph size-m">{{
+          this.content.itemName
+        }}</span>
+
+        <label *ngIf="this.type == 'order'" class="order-line__date size-l">{{
+          this.formedDate
+        }}</label>
+      </div>
+
+      <div class="order-line__main-line">
+        <span class="order-line__price paragraph size-m">{{
+          this.type == "order"
+            ? this.content.itemPrice + " x " + this.content.itemQuantity
+            : this.content.itemPrice
+        }}</span>
+
+        <app-status-label
+          *ngIf="this.type == 'order'"
+          [design]="this.content.status!.design"
+          [slim]="true"
+          >{{ this.content.status!.currentState }}</app-status-label
+        >
+
+        <button
+          *ngIf="this.type == 'add-item'"
+          class="order-line__add-btn"
+          type="button"
+          (click)="addItem()"
+        >
+          Add Item
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

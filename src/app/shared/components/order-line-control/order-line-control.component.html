@@ -1,0 +1,72 @@
+<div class="order-line">
+  <div class="order-line__container">
+    <span class="order-line__image-container">
+      <img
+        [src]="this.value.imageUrl"
+        onerror="this.src='../../../../assets/icons/svg/placeholder-square-img.svg';"
+        alt="IMG"
+      />
+    </span>
+
+    <div class="order-line__details">
+      <div class="order-line__top-line">
+        <span class="order-line__name paragraph size-m">{{
+          this.value.itemName
+        }}</span>
+
+        <button
+          class="order-line__remove-btn"
+          type="button"
+          (click)="removeItem()"
+        >
+          Remove
+        </button>
+      </div>
+
+      <div class="order-line__main-line">
+        <div class="order-line__counter">
+          <button
+            class="order-line__count-btn"
+            type="button"
+            [attr.disabled]="this.value.itemQuantity! <= 1 || undefined"
+            (click)="onDecrease()"
+          >
+            <app-svg-icon
+              class="icon"
+              iconName="fi_minus"
+              iconStyle="feather"
+            ></app-svg-icon>
+          </button>
+
+          <label class="order-line__quantity size-l">{{
+            this.value.itemQuantity
+          }}</label>
+
+          <button
+            class="order-line__count-btn"
+            type="button"
+            (click)="onIncrease()"
+          >
+            <app-svg-icon
+              class="icon"
+              iconName="fi_plus"
+              iconStyle="feather"
+            ></app-svg-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-line">
+    <p class="sub-line__title paragraph size-m">Sub-Total</p>
+    <p class="sub-line__value paragraph size-m">
+      {{
+        "$" +
+          (
+            (this.value.itemPrice | currencyToNumber) * this.value.itemQuantity!
+          ).toFixed(2)
+      }}
+    </p>
+  </div>
+</div>
