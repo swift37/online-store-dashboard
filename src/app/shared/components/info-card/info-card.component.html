@@ -1,0 +1,45 @@
+<div class="card">
+  <header class="card__header">
+    <div
+      class="card__header__content"
+      [ngClass]="{ 'large-icon': this.largeIcon }"
+    >
+      <span *ngIf="iconName" class="icon-container {{ iconColor }}">
+        <app-svg-icon
+          class="icon"
+          [iconName]="iconName"
+          [iconStyle]="iconStyle"
+        ></app-svg-icon>
+      </span>
+
+      <div *ngIf="this.header" class="heading-container">
+        <span
+          *ngIf="this.header.title"
+          class="heading-container__title paragraph size-m"
+          >{{ this.header.title }}</span
+        >
+        <label
+          *ngIf="this.header.subtitle || this.header.highlightedSubtitle"
+          class="heading-container__subtitle size-l"
+          >{{ this.header.subtitle }}
+          <span class="highlighted">{{ this.header.highlightedSubtitle }}</span>
+        </label>
+      </div>
+    </div>
+
+    <app-status-label
+      class="status"
+      *ngIf="this.header?.status"
+      [design]="this.header!.status!.design"
+      >{{ this.header!.status!.currentState }}</app-status-label
+    >
+  </header>
+
+  <div class="card__content">
+    <div *ngFor="let item of this.data" class="item">
+      <label class="item__label size-l">{{ item.label }}</label>
+
+      <span class="item__content paragraph size-m">{{ item.content }}</span>
+    </div>
+  </div>
+</div>
