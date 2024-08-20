@@ -1,0 +1,89 @@
+@import "./mixins";
+
+.new-entity {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+
+  &__buttons {
+    @include flex-center(both);
+    gap: 16px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &__btn {
+    width: 180px;
+  }
+
+  &:has(.form__column:nth-child(2)) {
+    .new-entity__buttons {
+      gap: 40px;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  gap: 52px;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 375px;
+
+    &.empty-header {
+      padding-top: 48px;
+    }
+  }
+
+  &__col-header {
+    @include flex-center(vertical);
+    justify-content: space-between;
+    height: 20px;
+  }
+
+  &__sub-title {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black-30);
+  }
+
+  &__field {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px 12px;
+    width: 100%;
+
+    .control {
+      flex: 1;
+      width: 100%;
+    }
+
+    &.date-time {
+      gap: 1px 12px;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+
+    .item {
+      width: 100%;
+    }
+  }
+
+  &__no-items {
+    @include flex-center(both);
+    height: 100%;
+  }
+}
