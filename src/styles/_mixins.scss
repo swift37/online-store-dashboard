@@ -50,14 +50,12 @@
     flex-direction: column;
   }
 
-  @if $position ==
-    "vertical" or
+  @if (not $columnDirection and $position == "vertical") or
     ($columnDirection and $position == "horizontal")
   {
     align-items: center;
   } @else if
-    $position ==
-    "horizontal" or
+    (not $columnDirection and $position == "horizontal") or
     ($columnDirection and $position == "vertical")
   {
     justify-content: center;

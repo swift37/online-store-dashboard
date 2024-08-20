@@ -1,38 +1,68 @@
-$color-primary: #5570f1;
-$color-secondary: #ffcc91;
-$color-black: #1c1d22;
-
 :root {
-  @for $i from 10 to 0 {
-    --color-primary-#{$i * 10}: #{rgba($color-primary, calc($i / 10))};
-  }
+  --color-primary-100: #5570f1;
+  --color-primary-90: #6078ec;
+  --color-primary-80: #6d83ec;
+  --color-primary-70: #7c8fec;
+  --color-primary-60: #8899e9;
+  --color-primary-50: #97a5eb;
+  --color-primary-40: #abb5e9;
+  --color-primary-30: #b6bfe8;
+  --color-primary-20: #c4cae8;
+  --color-primary-10: #dbdeee;
 
-  @for $i from 10 to 0 {
-    --color-secondary-#{$i * 10}: #{rgba($color-secondary, calc($i / 10))};
-  }
+  --color-secondary-100: #ffcc91;
+  --color-secondary-90: #ffd29e;
+  --color-secondary-80: #ffdaae;
+  --color-secondary-70: #ffdfba;
+  --color-secondary-60: #ffe5c8;
+  --color-secondary-50: #ffead1;
+  --color-secondary-40: #fff0de;
+  --color-secondary-30: #fff2e2;
+  --color-secondary-20: #fef5ea;
+  --color-secondary-10: #fef9f2;
 
-  @for $i from 10 to 0 {
-    --color-black-#{$i * 10}: #{rgba($color-black, calc($i / 10))};
-  }
+  --color-black-100: #1c1d22;
+  --color-black-90: #2c2d33;
+  --color-black-80: #33343a;
+  --color-black-70: #37393f;
+  --color-black-60: #45464e;
+  --color-black-50: #53545c;
+  --color-black-40: #6e7079;
+  --color-black-30: #8b8d97;
+  --color-black-20: #a6a8b1;
+  --color-black-10: #bec0ca;
 
   --color-action-success: #519c66;
   --color-action-fail: #cc5f5f;
+
+  --color-nav-bg: #fff;
+  --color-main-bg: #f4f5fa;
+
+  --color-border: #f1f3f9;
 
   --border-radius-default: 8px;
   --border-radius-smooth: 12px;
 
   --border-input: 1px solid #cfd3d4;
-  --border-button: 2px solid var(--color-primary);
 
   --height-input: 52px;
   --height-input-labeled: 58px;
+  --height-input-slim: 38px;
   --height-search: 45px;
   --height-textarea: 163px;
+  --height-button: 58px;
+  --height-button-slim: 44px;
+  --height-button-mini: 30px;
 
   --padding-input: 8px 16px;
+  --padding-input-slim: 7px 12px;
   --padding-input-labeled: 31px 16px 8px;
-  --padding-button: 17px 16px;
+  --padding-textarea: 16px 16px 8px;
+  --padding-search: 8px 16px 8px 52px;
   --padding-dropdown: 20px 16px;
+  --padding-button: 17px 16px;
+  --padding-button-mini: 8px;
+  --padding-dropdown: 16px 20px;
 
   --font-size-input: 16px;
   --font-size-button: 20px;

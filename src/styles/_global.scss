@@ -1,3 +1,7 @@
+body.modal-open {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -9,6 +13,7 @@ label,
   vertical-align: baseline;
   font-weight: var(--font-weight-regular);
   letter-spacing: normal;
+  transition: var(--transition-all);
 }
 
 label,
