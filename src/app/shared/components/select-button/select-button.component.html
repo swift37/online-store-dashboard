@@ -1,0 +1,44 @@
+<div class="select-button" [class.opened]="isDropdownOpen">
+  <button
+    class="select-button__button"
+    type="button"
+    [attr.id]="id"
+    [attr.disabled]="this.disabled ? true : null"
+    (click)="onClickButton()"
+  >
+    <span class="select-button__state">{{
+      this.displayedValue() ?? "Select..."
+    }}</span>
+  </button>
+
+  <div class="select-button__dropdown-btn" (click)="toggleDropdown()">
+    <span class="select-button__dropdown-icon"></span>
+  </div>
+
+  <ng-template [ngIf]="isDropdownOpen" #dropdown>
+    <div class="select-button__dropdown" @dropdown>
+      <div
+        class="select-button__dropdown-menu"
+        [class.overflowed]="this.options.length > this.maxVisibleOptions"
+        [style.height.px]="
+          this.options.length < this.maxVisibleOptions
+            ? (this.options.length || 1) * this.itemSizePx
+            : this.maxVisibleOptions * this.itemSizePx
+        "
+        [style.max-height.px]="this.maxVisibleOptions * this.itemSizePx"
+      >
+        <div *ngIf="!this.options.length" class="select-button__dropdown-item">
+          No options
+        </div>
+
+        <div
+          *ngFor="let option of options"
+          class="select-button__dropdown-item"
+          (click)="onSelect(option)"
+        >
+          {{ option?.[this.settings.displayPropKey] }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
