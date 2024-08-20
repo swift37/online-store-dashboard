@@ -1,0 +1,65 @@
+<div class="filters-popup">
+  <p class="filters-popup__title">Filters</p>
+
+  <form
+    class="filters-popup__filters-group"
+    [formGroup]="this.filtersForm"
+    (ngSubmit)="onApply()"
+  >
+    <ng-container *ngFor="let def of this.filterDefs">
+      <div *ngIf="def.type == 'select'" class="filter-line">
+        <label for="" class="filter-line__label size-l">{{ def.label }}</label>
+
+        <div class="filter-line__filter select">
+          <app-select
+            placeholder="All"
+            [options]="def.selectParams!.options"
+            [settings]="def.selectParams!.settings"
+            [slim]="true"
+            [emphasizedText]="true"
+            [hideCheck]="true"
+            [formControlName]="def.formControlName"
+          ></app-select>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngFor="let def of this.filterDefs">
+      <div *ngIf="def.type == 'range'" class="filter-line">
+        <label for="" class="filter-line__label size-l">{{ def.label }}</label>
+
+        <div
+          class="filter-line__filter range"
+          [formGroupName]="def.formControlName"
+        >
+          <app-input
+            label="From"
+            type="number"
+            [slim]="true"
+            [emphasizedText]="true"
+            [hideCheck]="true"
+            formControlName="from"
+          ></app-input>
+
+          <app-input
+            label="To"
+            type="number"
+            [slim]="true"
+            [emphasizedText]="true"
+            [hideCheck]="true"
+            formControlName="to"
+          ></app-input>
+        </div>
+      </div>
+    </ng-container>
+
+    <app-button
+      class="filters-popup__apply-btn"
+      type="submit"
+      design="filled"
+      color="primary"
+      size="full-slim"
+      >Apply</app-button
+    >
+  </form>
+</div>

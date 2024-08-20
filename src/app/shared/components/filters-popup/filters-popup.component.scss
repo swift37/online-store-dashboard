@@ -1,0 +1,65 @@
+@import "../../../../styles/mixins";
+
+:host {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 24px 21px;
+  background-color: #fff;
+  border-radius: var(--border-radius-smooth);
+  box-shadow: 0 4px 32px 0 rgba(61, 70, 112, 0.08);
+  z-index: 100;
+  transition: all 0.2s ease-in-out;
+}
+
+.filters-popup {
+  @include flex-center(vertical, true);
+  gap: 21px;
+  width: 275px;
+  height: fit-content;
+
+  &__title {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    line-height: 24px;
+    color: var(--color-black-100);
+  }
+
+  &__filters-group {
+    @include flex-center(vertical, true);
+    gap: 16px;
+  }
+
+  &__apply-btn {
+    width: 100%;
+    height: 36px;
+    font-size: 14px;
+    line-height: auto;
+  }
+}
+
+.filter-line {
+  @include flex-center(vertical, true);
+  gap: 8px;
+
+  &__label {
+    color: var(--color-black-50);
+  }
+
+  &__filter {
+    @include flex-center(vertical);
+    justify-content: space-between;
+
+    &.choice {
+      padding: 4px 0 0 0;
+      flex-wrap: wrap;
+    }
+
+    &.range {
+      gap: 12px;
+    }
+  }
+}
