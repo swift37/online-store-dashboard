@@ -1,0 +1,151 @@
+@import "../../../../styles/mixins";
+
+:host {
+  display: block;
+  width: 100%;
+  height: 650px;
+}
+
+.data-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  padding: 22px 28px 7px 21px;
+  background-color: #fff;
+  border-radius: var(--border-radius-smooth);
+
+  &__header {
+    @include flex-center(vertical);
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black-60);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    table {
+      border-spacing: 0;
+    }
+  }
+}
+
+.grid {
+  width: 100%;
+  height: 100%;
+
+  table {
+    width: 100%;
+  }
+
+  thead {
+    height: 52px;
+  }
+
+  tbody tr {
+    height: 48px;
+  }
+
+  th,
+  td {
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  th {
+    color: var(--color-black-90);
+    border-top: 1px solid #e1e2e9;
+    border-bottom: 1px solid #e1e2e9;
+  }
+
+  td {
+    color: var(--color-black-40);
+  }
+
+  &__check {
+    width: fit-content;
+    margin-right: 5px;
+  }
+
+  &__sort {
+    $sort: &;
+
+    position: relative;
+
+    &.applied {
+      #{$sort}__btn {
+        color: var(--color-black-90);
+      }
+
+      #{$sort}__direction {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &__btn {
+      @include square(17px);
+      vertical-align: middle;
+      color: var(--color-black-20);
+      margin-left: 8px;
+      transition: all 0.3s ease-out;
+      cursor: pointer;
+
+      &.applied {
+        color: var(--color-black-90);
+      }
+
+      &:hover {
+        color: var(--color-black-80);
+      }
+    }
+
+    &__direction {
+      position: absolute;
+      bottom: -1px;
+      right: -6px;
+      @include square(12px);
+      color: var(--color-black-90);
+      opacity: 0;
+      visibility: collapse;
+      transition: transform 0.2s ease-in-out, opacity 0.1s ease-in,
+        visibility 0.1s ease-in;
+
+      &.descending {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__image-container {
+    display: flex;
+    flex-shrink: 0;
+    @include square(36px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-default);
+    object-fit: contain;
+    object-position: center;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+
+      &[alt] {
+        @include flex-center(both);
+        color: #cc0000;
+      }
+    }
+  }
+}
+
+::ng-deep .cdk-virtual-scroll-content-wrapper {
+  height: 100%;
+}

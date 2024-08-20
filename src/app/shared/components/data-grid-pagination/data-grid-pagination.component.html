@@ -1,0 +1,57 @@
+<div class="data-grid-footer">
+  <div class="page-size-control">
+    <app-mini-select
+      [options]="this.paginationOptions.pageSizeOptions"
+      [value]="this.paginationOptions.pageSize"
+      [settings]="{
+        idPropKey: 'size',
+        displayPropKey: 'label'
+      }"
+      [openUpward]="true"
+      (onChange)="onPageSizeChanged($event.selectedOptions[0])"
+    ></app-mini-select>
+
+    <p class="page-size-control__text-light paragraph size-m">Items per page</p>
+
+    <p class="page-size-control__text paragraph size-m">
+      {{
+        this.paginationOptions.currentPage * this.paginationOptions.pageSize -
+          this.paginationOptions.pageSize +
+          1
+      }}
+      -
+      {{ this.paginationOptions.currentPage * this.paginationOptions.pageSize }}
+      of {{ this.paginationOptions.itemsTotal }} items
+    </p>
+  </div>
+
+  <div class="page-number-control">
+    <app-mini-select
+      [options]="this.pageOptions"
+      [value]="this.paginationOptions.currentPage"
+      [settings]="{ idPropKey: 'page', displayPropKey: 'label' }"
+      [openUpward]="true"
+      (onChange)="onPageChanged($event.selectedOptions[0])"
+    ></app-mini-select>
+
+    <p class="page-number-control__text paragraph size-m">
+      of {{ this.paginationOptions.pagesTotal }} pages
+    </p>
+
+    <div class="page-number-control__spin">
+      <app-svg-icon
+        class="page-number-control__prev-page"
+        iconName="arrow-down-2"
+        iconStyle="light"
+        (click)="onPageChanged(this.paginationOptions.currentPage - 1)"
+      ></app-svg-icon>
+
+      <app-svg-icon
+        class="page-number-control__next-page"
+        iconName="arrow-down-2"
+        iconStyle="light"
+        (click)="onPageChanged(this.paginationOptions.currentPage + 1)"
+      ></app-svg-icon>
+    </div>
+  </div>
+</div>

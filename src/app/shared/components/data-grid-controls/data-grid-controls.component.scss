@@ -1,0 +1,42 @@
+@import "../../../../styles/mixins";
+
+.controls {
+  display: flex;
+  gap: 7px;
+
+  &__search {
+    width: 176px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__popup-action {
+    display: flex;
+    position: relative;
+  }
+
+  &__filters-popup {
+    left: unset;
+    right: -70px;
+  }
+
+  &__date-filters-popup {
+    top: 0;
+    //left: -230px;
+    left: unset;
+    right: 0;
+    transform: translateY(36px);
+
+    &.unfolded {
+      transform: translateY(-10%);
+    }
+  }
+
+  &__bulk-actions-popup {
+    left: unset;
+    right: 0;
+  }
+}

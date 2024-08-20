@@ -1,0 +1,73 @@
+<div class="controls" [formGroup]="this.gridFiltersForm">
+  <app-search-input
+    class="controls__search"
+    [slimStyle]="true"
+    (onChange)="(null)"
+    formControlName="search"
+  ></app-search-input>
+
+  <div class="controls__actions">
+    <div class="controls__popup-action" #filtersPopup>
+      <app-mini-button
+        iconName="fi_filter"
+        iconStyle="feather"
+        (onClick)="toggleFiltersPopup()"
+        >Filter</app-mini-button
+      >
+
+      <app-filters-popup
+        *ngIf="this.filtersPopupState"
+        class="controls__filters-popup"
+        [filterDefs]="this.filterDefs"
+        [filtersForm]="this.gridFiltersForm"
+        (filtersApplied)="toggleFiltersPopup($event)"
+        @popup
+      ></app-filters-popup>
+    </div>
+
+    <div
+      *ngFor="let def of dateFilterDefs; index as i"
+      class="controls__popup-action"
+      #dateRangePopup
+    >
+      <app-mini-button
+        iconName="calendar"
+        iconStyle="light"
+        (onClick)="toggleDateRangePopup(i)"
+        >{{ def.label }}</app-mini-button
+      >
+
+      <app-date-filters-popup
+        *ngIf="this.datePopupStates[i]"
+        class="controls__date-filters-popup"
+        [title]="def.label"
+        [controlName]="def.formControlName"
+        [filtersForm]="this.gridFiltersForm"
+        (filtersApplied)="toggleDateRangePopup(i, $event)"
+        @popup
+      ></app-date-filters-popup>
+    </div>
+
+    <div
+      *ngIf="this.bulkActionDefs.length"
+      class="controls__popup-action"
+      #actionsPopup
+    >
+      <app-mini-button
+        iconName="fi_chevron-down"
+        iconPosition="right"
+        iconStyle="feather"
+        (onClick)="toggleActionsPopup()"
+        >Bulk Actions</app-mini-button
+      >
+      <app-bulk-actions-popup
+        *ngIf="this.actionsPopupState"
+        class="controls__bulk-actions-popup"
+        [actionDefs]="this.bulkActionDefs"
+        (actionsApplied)="toggleActionsPopup($event)"
+        @popup
+      >
+      </app-bulk-actions-popup>
+    </div>
+  </div>
+</div>

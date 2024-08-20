@@ -1,0 +1,145 @@
+<div class="data-grid">
+  <header class="data-grid__header">
+    <p class="data-grid__title paragraph size-l">{{ this.gridTitle }}</p>
+
+    <app-data-grid-controls
+      [columnDefs]="this.columnDefs"
+      (filtersApplied)="this.filtersApplied.emit($event)"
+      (actionsApplied)="onActionsApply($event)"
+    ></app-data-grid-controls>
+  </header>
+
+  <div class="data-grid__content">
+    <cdk-virtual-scroll-viewport
+      class="grid"
+      itemSize="48"
+      [style.height.px]="
+        (this.paginationOptions?.pageSize || this.data.length) * 48
+      "
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <app-checkbox
+                class="grid__check"
+                (onChange)="onSelectAll($event)"
+              ></app-checkbox>
+            </th>
+
+            <ng-container *ngFor="let def of columnDefs">
+              <th *ngIf="def.isStatusCol && def.statusColSettings?.editable">
+                <span class="paragraph size-m"
+                  >{{ def.displayName }} Action</span
+                >
+              </th>
+
+              <th>
+                <span class="paragraph size-m">{{ def.displayName }}</span>
+
+                <span
+                  *ngIf="!def.isImageCol"
+                  class="grid__sort"
+                  [class.applied]="checkSortApplying(def.field)"
+                >
+                  <app-svg-icon
+                    class="grid__sort__btn"
+                    iconName="sort"
+                    (click)="applySorting(def.field)"
+                  ></app-svg-icon>
+
+                  <app-svg-icon
+                    class="grid__sort__direction"
+                    [class.descending]="isSortOrderDesc(def.field)"
+                    iconName="arrow-up"
+                    iconStyle="light"
+                  ></app-svg-icon>
+                </span>
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *cdkVirtualFor="let item of data; index as i">
+            <td>
+              <app-checkbox
+                class="grid__check"
+                [id]="'gridItem' + item[this.identifierField]"
+                [value]="this.selectedIds.includes(item[this.identifierField])"
+                (onChange)="toggleItemCheck(item[this.identifierField])"
+              ></app-checkbox>
+            </td>
+
+            <ng-container *ngFor="let def of columnDefs">
+              <td
+                *ngIf="!def.isStatusCol; else statusColTmpl"
+                class="paragraph size-m"
+              >
+                {{ item[def.field] }}
+
+                <span *ngIf="def.isImageCol" class="grid__image-container">
+                  <img
+                    [src]="item[def.field]"
+                    onerror="this.src='../../../../assets/icons/svg/placeholder-square-img.svg';"
+                    alt="IMG"
+                  />
+                </span>
+              </td>
+
+              <ng-template #statusColTmpl>
+                <td
+                  *ngIf="def.statusColSettings!.editable"
+                  class="paragraph size-m"
+                >
+                  <app-mini-select
+                    [options]="def.statusColSettings!.statuses"
+                    [settings]="{
+                      idPropKey: 'currentState',
+                      displayPropKey: 'label'
+                    }"
+                    [value]="item[def.field]"
+                    (onChange)="
+                      item[def.field] = $event.selectedOptions[0].currentState
+                    "
+                    (onChange)="onItemsChanged([item])"
+                  ></app-mini-select>
+                </td>
+
+                <td class="paragraph size-m">
+                  <app-status-label
+                    [design]="
+                      this.statusesService.getStatusDesign(item[def.field])
+                    "
+                    >{{
+                      this.statusesService.getStatusLabel(item[def.field])
+                    }}</app-status-label
+                  >
+                </td>
+              </ng-template>
+
+              <ng-template #imageColTmpl>
+                <td>
+                  <span class="order-line__image-container">
+                    <img
+                      [src]="item[def.field]"
+                      onerror="this.src='../../../../assets/icons/svg/placeholder-square-img.svg';"
+                      alt="IMG"
+                    />
+                  </span>
+                </td>
+              </ng-template>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </cdk-virtual-scroll-viewport>
+
+    <app-data-grid-pagination
+      *ngIf="paginationOptions"
+      [paginationOptions]="this.paginationOptions"
+      (pageChanged)="this.pageChanged.emit($event)"
+      (pageSizeChanged)="this.pageSizeChanged.emit($event)"
+    ></app-data-grid-pagination>
+  </div>
+</div>
