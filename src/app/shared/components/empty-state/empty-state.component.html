@@ -1,0 +1,19 @@
+<div class="empty-state">
+  <div class="empty-state__icon-container">
+    <app-svg-icon
+      class="empty-state__icon"
+      [iconName]="this.iconName"
+      [iconStyle]="this.iconStyle"
+    ></app-svg-icon>
+  </div>
+
+  <div class="empty-state__content">
+    <p class="empty-state__title sub-heading size-s">{{ this.title }}</p>
+
+    <p class="empty-state__text paragraph size-m">
+      {{ this.subtitle }}
+    </p>
+
+    <ng-content></ng-content>
+  </div>
+</div>
