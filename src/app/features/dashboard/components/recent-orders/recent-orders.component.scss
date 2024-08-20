@@ -1,0 +1,44 @@
+@import "../../../../../styles/mixins";
+
+:host {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  height: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: var(--border-radius-smooth);
+
+  &__heading {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black-60);
+  }
+
+  &__container {
+    @include flex-center(both);
+    height: 100%;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__order {
+    width: 100%;
+  }
+
+  &__new-product {
+    width: 180px;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 12px;
+  }
+}

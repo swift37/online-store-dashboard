@@ -1,0 +1,33 @@
+<div class="orders">
+  <p class="orders__heading paragraph size-l">Recent Orders</p>
+
+  <div *ngIf="this.orders?.length; else noOrders" class="orders__list">
+    <app-order-line
+      *ngFor="let order of this.orders"
+      class="orders__order"
+      [content]="order"
+    ></app-order-line>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="orders__container">
+      <app-empty-state
+        title="No Orders Yet?"
+        subtitle="Add products to the store and start selling to see orders here"
+        iconName="bag"
+        iconStyle="bulk"
+      >
+        <app-button
+          [routerLink]="['/inventory/new-item']"
+          class="orders__new-product"
+          color="primary"
+          iconName="fi_plus"
+          iconStyle="feather"
+          size="full-slim"
+          design="filled"
+          >New Product</app-button
+        >
+      </app-empty-state>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,36 @@
+<div class="chart">
+  <header class="chart__header">
+    <p class="chart__title paragraph size-l">Marketing</p>
+
+    <app-mini-select
+      *ngIf="timeSpans?.length"
+      [options]="timeSpans"
+      [value]="selectedTimeSpanId"
+      [settings]="{
+        idPropKey: 'id',
+        displayPropKey: 'label'
+      }"
+      design="transparent"
+      (onChange)="onTimeSpanChanged($event.selectedOptions[0])"
+    ></app-mini-select>
+  </header>
+
+  <div class="chart__details">
+    <div class="chart__legend">
+      <label
+        *ngFor="let item of data"
+        class="chart__legend__item size-m"
+        [style.--disc-color]="item.color"
+        >{{ item.label }}</label
+      >
+    </div>
+
+    <div class="chart__container">
+      <div class="chart__background">
+        <div class="chart__doughnut">
+          <canvas #doughnutChart></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

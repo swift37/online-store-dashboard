@@ -1,0 +1,71 @@
+<div class="dashboard">
+  <div class="top-band">
+    <div class="top-band__main-column">
+      <app-summary-card
+        class="card"
+        [data]="this.testSummaryData"
+        [timeSpans]="this.relTimeSpans"
+        iconName="graph"
+        iconColor="primary"
+      ></app-summary-card>
+
+      <app-summary-card
+        class="card"
+        [data]="this.testSummaryData"
+        [timeSpans]="this.relTimeSpans"
+        iconName="2-user"
+        iconColor="secondary"
+      ></app-summary-card>
+    </div>
+
+    <app-summary-card
+      class="card"
+      [data]="this.testSummaryData3Cols"
+      [timeSpans]="this.relTimeSpans"
+      iconName="bag"
+      iconColor="secondary"
+    ></app-summary-card>
+  </div>
+
+  <div class="main-band">
+    <div class="main-band__main-column">
+      <div class="main-band__mid-container">
+        <app-doughnut-chart
+          class="main-band__doughnut-chart"
+          [timeSpans]="this.relTimeSpans"
+          [data]="this.doughnutChartTestData"
+        ></app-doughnut-chart>
+
+        <div class="main-band__cards-group">
+          <app-summary-card
+            class="card"
+            [data]="this.testSummaryData"
+            [timeSpans]="this.relTimeSpans"
+            iconName="folder"
+            iconColor="primary"
+            [primaryStyle]="true"
+          ></app-summary-card>
+
+          <app-summary-card
+            class="card"
+            [data]="this.testSummaryData"
+            [timeSpans]="this.relTimeSpans"
+            iconName="buy"
+            iconColor="secondary"
+          ></app-summary-card>
+        </div>
+      </div>
+
+      <app-bar-chart
+        class="main-band__bar-chart"
+        [timeSpans]="this.absTimeSpans"
+        [selectedTimeSpanId]="1"
+        [maxValue]="100000"
+        [dataSets]="this.barChartDataSets"
+        [data]="this.barChartTestData"
+      ></app-bar-chart>
+    </div>
+
+    <app-recent-orders class="main-band__orders"></app-recent-orders>
+  </div>
+</div>

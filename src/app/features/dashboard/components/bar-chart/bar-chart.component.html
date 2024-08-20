@@ -1,0 +1,65 @@
+<div class="chart">
+  <header class="chart__header">
+    <div class="chart__header__main">
+      <p class="chart__title paragraph size-l">Summary</p>
+
+      <app-mini-select
+        *ngIf="dataSets?.length"
+        [options]="this.dataSets"
+        [value]="this.selectedDateSetId"
+        [settings]="{
+          idPropKey: 'id',
+          displayPropKey: 'label'
+        }"
+        design="primary"
+        (onChange)="onDataSetChanged($event.selectedOptions[0])"
+      ></app-mini-select>
+    </div>
+
+    <app-mini-select
+      *ngIf="this.timeSpans?.length"
+      [options]="this.timeSpans"
+      [value]="this.selectedTimeSpanId"
+      [settings]="{
+        idPropKey: 'id',
+        displayPropKey: 'label'
+      }"
+      design="transparent"
+      (onChange)="onTimeSpanChanged($event.selectedOptions[0])"
+    ></app-mini-select>
+  </header>
+
+  <div class="chart__container">
+    <div class="chart__y-axis">
+      <label *ngFor="let label of axisY" class="chart__y-label size-m">{{
+        label | shrinkNumberZeros
+      }}</label>
+    </div>
+
+    <div *ngFor="let item of data" class="chart__bar">
+      <div
+        class="chart__bar-container"
+        [style.flex-direction]="item.value > 0 ? 'column' : 'column-reverse'"
+      >
+        <div
+          class="chart__bar-line"
+          [style.height.%]="
+            ((item.value < 0 ? -item.value : item.value) / this.valuesRange) *
+            100
+          "
+          @bar
+        ></div>
+        <div
+          class="chart__bar-offset"
+          [style.height.%]="
+            ((item.value < 0 ? this.maxValue : -this.minValue) /
+              this.valuesRange) *
+            100
+          "
+        ></div>
+      </div>
+
+      <label class="chart__bar-label size-m">{{ item.label }}</label>
+    </div>
+  </div>
+</div>
