@@ -1,0 +1,61 @@
+<div class="price-form" [formGroup]="this.priceForm">
+  <div class="price-form__field">
+    <app-input
+      class="control"
+      type="number"
+      placeholder="Cost Price"
+      [filledStyle]="true"
+      [hideSpin]="true"
+      formControlName="costPrice"
+    ></app-input>
+
+    <app-input
+      class="control"
+      type="number"
+      placeholder="Selling Price"
+      [filledStyle]="true"
+      [hideSpin]="true"
+      formControlName="sellingPrice"
+    ></app-input>
+  </div>
+
+  <div class="price-form__switch-field">
+    <span class="switch-title paragraph size-l">Discount</span>
+
+    <app-toggle-switch
+      [id]="'addDiscount'"
+      label="Add Discount"
+      labelPosition="left"
+      size="medium"
+      [displayErrors]="false"
+      formControlName="addDiscount"
+    ></app-toggle-switch>
+  </div>
+
+  <div
+    class="price-form__field"
+    *ngIf="
+      this.priceForm.controls.discountType &&
+      this.priceForm.controls.rawDiscount
+    "
+    @field
+  >
+    <app-select
+      class="control"
+      placeholder="Discount Type"
+      [options]="this.selectOptions"
+      [settings]="this.selectSettings"
+      [filledStyle]="true"
+      formControlName="discountType"
+    ></app-select>
+
+    <app-input
+      class="control"
+      type="number"
+      placeholder="Discount"
+      [filledStyle]="true"
+      [hideSpin]="true"
+      formControlName="rawDiscount"
+    ></app-input>
+  </div>
+</div>

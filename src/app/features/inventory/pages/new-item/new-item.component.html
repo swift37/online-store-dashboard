@@ -1,0 +1,210 @@
+<form
+  class="new-item-form"
+  [formGroup]="this.newItemForm"
+  (ngSubmit)="onSubmit()"
+>
+  <header class="new-item-form__header">
+    <p class="new-item-form__title paragraph size-l">New Inventory Item</p>
+
+    <div class="new-item-form__buttons">
+      <app-select-button
+        [options]="[
+          { value: 'publish', label: 'Publish' },
+          { value: 'preview', label: 'Publish as Preview' },
+          { value: 'unavailable', label: 'Publish as Unavailable' },
+          { value: 'cancel', label: 'Cancel' },
+          { value: 'reset', label: 'Reset' }
+        ]"
+        [settings]="{ idPropKey: 'value', displayPropKey: 'label' }"
+        value="publish"
+      ></app-select-button>
+
+      <app-button
+        class="new-item-form__btn"
+        type="submit"
+        size="full-slim"
+        color="primary"
+        design="filled"
+        >Save</app-button
+      >
+    </div>
+  </header>
+
+  <div class="new-item-form__form">
+    <div class="form">
+      <div class="form__column">
+        <app-input
+          class="form__field"
+          placeholder="Product Name"
+          [filledStyle]="true"
+          formControlName="name"
+        ></app-input>
+
+        <app-select
+          class="form__field"
+          placeholder="Category"
+          [options]="[{ id: 0, label: 'Category' }]"
+          [settings]="{ idPropKey: 'id', displayPropKey: 'label' }"
+          [withSearch]="true"
+          [filledStyle]="true"
+          formControlName="categoryId"
+        ></app-select>
+
+        <app-price-form [formGroup]="this.priceForm"></app-price-form>
+
+        <app-input
+          class="form__field"
+          type="number"
+          placeholder="Units in Stock"
+          [filledStyle]="true"
+          formControlName="unitsInStock"
+        ></app-input>
+
+        <app-input
+          class="form__field"
+          placeholder="Manufacturer"
+          [filledStyle]="true"
+          formControlName="manufacturer"
+        ></app-input>
+
+        <app-input
+          class="form__field"
+          placeholder="Manufacturer's Code"
+          [filledStyle]="true"
+          formControlName="manufacturersCode"
+        ></app-input>
+
+        <app-input
+          class="form__field"
+          placeholder="Store Code"
+          [filledStyle]="true"
+          formControlName="storeCode"
+        ></app-input>
+
+        <app-select
+          class="form__field"
+          placeholder="State"
+          [options]="this.productStates"
+          [settings]="{ idPropKey: 'currentState', displayPropKey: 'label' }"
+          [filledStyle]="true"
+          formControlName="state"
+        ></app-select>
+
+        <div class="form__switch-field">
+          <span class="switch-title paragraph size-l">Product Labels</span>
+
+          <app-toggle-switch
+            [id]="'addLabels'"
+            label="Add Labels"
+            labelPosition="left"
+            size="medium"
+            [displayErrors]="false"
+            formControlName="addLabels"
+          ></app-toggle-switch>
+        </div>
+
+        <app-select
+          *ngIf="this.newItemForm.controls.addLabels.value"
+          class="form__field"
+          placeholder="Labels"
+          [options]="this.productStates"
+          [settings]="{ idPropKey: 'currentState', displayPropKey: 'label' }"
+          [multiple]="true"
+          [filledStyle]="true"
+          formControlName="labels"
+          @field
+        ></app-select>
+      </div>
+
+      <div class="form__column">
+        <app-text-area
+          class="form__field"
+          placeholder="Description"
+          [filledStyle]="true"
+          formControlName="description"
+        >
+        </app-text-area>
+
+        <div class="form__switch-field">
+          <span class="switch-title paragraph size-l">Return Policy</span>
+
+          <app-toggle-switch
+            [id]="'isNonReturnable'"
+            label="Mark as Non-Returnable"
+            labelPosition="left"
+            size="medium"
+            [displayErrors]="false"
+            formControlName="isNonReturnable"
+          ></app-toggle-switch>
+        </div>
+
+        <div class="form__switch-field">
+          <span class="switch-title paragraph size-l">Publishing Date</span>
+
+          <app-toggle-switch
+            [id]="'addPublishingDate'"
+            label="Add Publishing Date"
+            labelPosition="left"
+            size="medium"
+            [displayErrors]="false"
+            formControlName="addPublishingDate"
+          ></app-toggle-switch>
+        </div>
+
+        <div
+          class="form__field date-time"
+          *ngIf="this.newItemForm.controls.addPublishingDate.value"
+          @field
+        >
+          <app-input
+            class="control"
+            type="date"
+            label="Order Date & Time"
+            [filledStyle]="true"
+            formControlName="publishingDate"
+          ></app-input>
+
+          <app-input
+            class="control"
+            type="time"
+            label=" "
+            [filledStyle]="true"
+            formControlName="publishingTime"
+          ></app-input>
+        </div>
+
+        <div class="form__specs-array" formArrayName="specificationIds">
+          <span class="specs-title paragraph size-l">Specifications</span>
+
+          <div
+            class="spec-field"
+            *ngFor="let spec of this.itemSpecs.controls; index as i"
+          >
+            <app-select
+              class="spec-field__control"
+              placeholder="Specification"
+              [options]="[{ id: 0, label: 'Spec' }]"
+              [settings]="{ idPropKey: 'id', displayPropKey: 'label' }"
+              [filledStyle]="true"
+              [formControlName]="i"
+            ></app-select>
+          </div>
+
+          <button class="new-spec" type="button" (click)="addItemSpec()">
+            <app-svg-icon
+              class="new-spec__icon"
+              iconName="fi_plus"
+              iconStyle="feather"
+            ></app-svg-icon>
+            New Specification
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <app-image-uploader
+      class="image-uploader"
+      [formGroup]="this.imagesForm"
+    ></app-image-uploader>
+  </div>
+</form>

@@ -1,0 +1,67 @@
+<div class="summary-page">
+  <header class="summary-page__header">
+    <p class="summary-page__title size-l">Inventory Summary</p>
+
+    <app-button
+      [routerLink]="['/inventory/new-item']"
+      class="summary-page__new-entity"
+      color="primary"
+      iconName="fi_plus"
+      iconStyle="feather"
+      size="full-slim"
+      design="filled"
+      >Add a New Product</app-button
+    >
+  </header>
+
+  <div class="summary-page__cards-group">
+    <app-summary-card
+      class="card"
+      [data]="this.itemsSummaryData.slice(0, 2)"
+      [timeSpans]="this.relTimeSpans"
+      iconName="folder"
+      iconColor="primary"
+      [primaryStyle]="true"
+    ></app-summary-card>
+
+    <app-summary-card
+      class="card"
+      [data]="this.itemsSummaryData.slice(2, 5)"
+      [timeSpans]="this.relTimeSpans"
+      iconName="bag"
+      iconColor="secondary"
+    ></app-summary-card>
+  </div>
+
+  <app-data-grid
+    *ngIf="this.items?.length; else emptyState"
+    class="summary-page__data-grid"
+    gridTitle="Inventory Items"
+    [columnDefs]="this.gridColumnDefs"
+    identifierField="id"
+    [data]="this.items"
+    [paginationOptions]="this.testPaginationOptions"
+  ></app-data-grid>
+
+  <ng-template #emptyState>
+    <div class="summary-page__empty-state">
+      <app-empty-state
+        title="No Products Yet?"
+        subtitle="Add products to the store and start selling"
+        iconName="bag"
+        iconStyle="bulk"
+      >
+        <app-button
+          [routerLink]="['/inventory/new-item']"
+          class="summary-page__new-product"
+          color="primary"
+          iconName="fi_plus"
+          iconStyle="feather"
+          size="full-slim"
+          design="filled"
+          >New Product</app-button
+        >
+      </app-empty-state>
+    </div>
+  </ng-template>
+</div>

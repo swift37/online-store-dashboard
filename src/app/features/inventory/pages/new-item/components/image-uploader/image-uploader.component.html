@@ -1,0 +1,133 @@
+<div class="uploader" [formGroup]="this.imagesForm">
+  <div
+    *ngIf="!this.mainImage?.value; else mainImgPreviewTmpl"
+    class="main-img-uploader"
+  >
+    <app-svg-icon
+      class="main-img-uploader__icon"
+      iconName="image"
+      iconStyle="bulk"
+    ></app-svg-icon>
+
+    <div class="main-img-uploader__content">
+      <label class="main-img-uploader__label paragraph size-l" for="main-img"
+        ><app-svg-icon
+          class="icon"
+          iconName="fi_upload-cloud"
+          iconStyle="feather"
+        ></app-svg-icon>
+        Upload Image</label
+      >
+      <input
+        class="main-img-uploader__input"
+        type="file"
+        accept="image/*"
+        id="main-img"
+        name="main-img"
+        (change)="uploadMainImage($event)"
+      />
+
+      <div class="helper-text">
+        <p class="helper-text__main-line paragraph size-m">
+          Upload a cover image for your product.
+        </p>
+
+        <label class="helper-text__sub-line size-l">
+          File Format <span class="black">jpeg, png</span> Recommend Size
+          <span class="black">1080x1080 (1:1)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #mainImgPreviewTmpl>
+    <div class="main-img-preview">
+      <img [src]="this.mainImage.value?.src" />
+
+      <div class="preview-actions">
+        <span class="preview-actions__action"
+          ><app-svg-icon
+            class="preview-actions__icon"
+            iconName="fi_upload-cloud"
+            iconStyle="feather"
+          ></app-svg-icon
+        ></span>
+
+        <span class="preview-actions__action" (click)="removeMainImage()"
+          ><app-svg-icon
+            class="preview-actions__icon"
+            iconName="delete"
+            iconStyle="light"
+          ></app-svg-icon
+        ></span>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="additional-imgs">
+    <p class="additional-imgs__title paragraph size-l">Additional Images</p>
+
+    <div class="additional-imgs__content">
+      <div
+        class="add-img-preview"
+        *ngFor="let img of this.addImages.controls; index as i"
+      >
+        <img [src]="img.value.src" />
+
+        <div class="preview-actions">
+          <label [for]="'replaceImg' + i" class="preview-actions__action"
+            ><app-svg-icon
+              class="preview-actions__icon"
+              iconName="fi_upload-cloud"
+              iconStyle="feather"
+            ></app-svg-icon
+          ></label>
+
+          <input
+            class="preview-actions__input"
+            type="file"
+            accept="image/*"
+            [id]="'replaceImg' + i"
+            (change)="uploadAddImage($event, i)"
+          />
+
+          <span class="preview-actions__action" (click)="removeAddImage(i)"
+            ><app-svg-icon
+              class="preview-actions__icon"
+              iconName="delete"
+              iconStyle="light"
+            ></app-svg-icon
+          ></span>
+        </div>
+      </div>
+
+      <div class="add-img-uploader">
+        <app-svg-icon
+          class="add-img-uploader__icon"
+          iconName="image"
+          iconStyle="bulk"
+        ></app-svg-icon>
+
+        <label class="add-img-uploader__label paragraph size-m" for="add-img"
+          ><app-svg-icon
+            class="icon"
+            iconName="fi_upload-cloud"
+            iconStyle="feather"
+          ></app-svg-icon>
+          Upload Image</label
+        >
+        <input
+          class="add-img-uploader__input"
+          type="file"
+          accept="image/*"
+          id="add-img"
+          name="add-img"
+          multiple
+          (change)="uploadAddImage($event)"
+        />
+      </div>
+
+      <div class="add-img-outline"></div>
+    </div>
+  </div>
+</div>

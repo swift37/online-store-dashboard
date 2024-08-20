@@ -1,0 +1,151 @@
+@import "../../../../../styles/mixins";
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.new-item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+
+  &__header {
+    @include flex-center(vertical);
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-weight: 500;
+    color: var(--color-black-60);
+  }
+
+  &__buttons {
+    @include flex-center(vertical);
+    gap: 24px;
+  }
+
+  &__btn {
+    height: 36px !important;
+    width: fit-content !important;
+    min-width: 160px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    line-height: 17px;
+  }
+
+  &__form {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+
+    .form {
+      flex: 67;
+    }
+
+    .image-uploader {
+      flex: 33;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  padding: 28px 32px;
+  background-color: #fff;
+  border-radius: var(--border-radius-smooth);
+  gap: 24px 64px;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 24px;
+    min-width: 375px;
+  }
+
+  &__field {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px 12px;
+    width: 100%;
+
+    .control {
+      flex: 1;
+      width: 100%;
+    }
+
+    &.date-time {
+      gap: 1px 12px;
+    }
+  }
+
+  &__switch-field {
+    @include flex-center(vertical);
+    justify-content: space-between;
+
+    .switch-title {
+      color: var(--color-black-30);
+      font-size: 16px !important;
+      font-weight: var(--font-weight-medium);
+      line-height: 19px;
+    }
+  }
+
+  &__specs-array {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 12px;
+    width: 100%;
+
+    .specs-title {
+      color: var(--color-black-30);
+      font-size: 18px !important;
+      font-weight: var(--font-weight-medium);
+      line-height: 22px;
+    }
+
+    .spec-field {
+      @include flex-center(vertical);
+      justify-content: space-between;
+
+      &__control {
+        flex: 1;
+      }
+    }
+
+    .new-spec {
+      align-self: flex-start;
+      @include flex-center(both);
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: var(--font-weight-regular);
+      line-height: 19px;
+      color: var(--color-black-50);
+      background-color: transparent;
+      border: none;
+      outline: none;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+
+      &__icon {
+        @include square(24px);
+      }
+
+      &:hover {
+        color: var(--color-black-100);
+      }
+    }
+  }
+}
