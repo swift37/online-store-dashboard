@@ -1,0 +1,39 @@
+<div class="mini-select">
+  <button
+    class="mini-select__button"
+    type="button"
+    [class.opened]="isDropdownOpen"
+    [attr.id]="id"
+    [disabled]="this.disabled ? true : null"
+    (click)="toggleDropdown()"
+  >
+    {{ this.displayedValue() ?? "Select..." }}
+  </button>
+
+  <ng-template [ngIf]="isDropdownOpen" #dropdown>
+    <div class="mini-select__dropdown" @dropdown>
+      <div
+        class="mini-select__dropdown-menu"
+        [class.overflowed]="this.options.length > this.maxVisibleOptions"
+        [style.height.px]="
+          this.options.length < this.maxVisibleOptions
+            ? (this.options.length || 1) * this.itemSizePx
+            : this.maxVisibleOptions * this.itemSizePx
+        "
+        [style.max-height.px]="this.maxVisibleOptions * this.itemSizePx"
+      >
+        <div *ngIf="!this.options.length" class="mini-select__dropdown-item">
+          No options
+        </div>
+
+        <div
+          *ngFor="let option of options; index as i"
+          class="mini-select__dropdown-item"
+          (click)="onSelect(option, i)"
+        >
+          {{ option?.[this.settings.displayPropKey] }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
