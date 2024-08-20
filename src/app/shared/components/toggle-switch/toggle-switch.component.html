@@ -1,0 +1,36 @@
+<div class="toggle-switch {{ size }}">
+  <div class="toggle-switch__container">
+    <label class="toggle-switch__switch" for="{{ id ? id : '' }}">
+      <input
+        type="checkbox"
+        [attr.id]="id"
+        [attr.checked]="value || null"
+        [disabled]="disabled ? true : null"
+        (input)="onChange($event)"
+        (blur)="touched()"
+      />
+      <span class="toggle-switch__slider">
+        <app-svg-icon
+          *ngIf="withIcon"
+          class="icon"
+          [iconName]="this.value ? 'fi_check' : 'fi_x'"
+          iconStyle="feather"
+        ></app-svg-icon>
+      </span>
+    </label>
+
+    <label *ngIf="label" class="toggle-switch__label {{ labelPosition }}">{{
+      label
+    }}</label>
+  </div>
+
+  <span
+    *ngIf="description"
+    class="toggle-switch__description paragraph size-m"
+    >{{ description }}</span
+  >
+  <app-control-errors
+    *ngIf="displayErrors && control"
+    [control]="control"
+  ></app-control-errors>
+</div>

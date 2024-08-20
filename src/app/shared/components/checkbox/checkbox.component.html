@@ -1,0 +1,28 @@
+<div class="checkbox">
+  <div class="checkbox__container">
+    <input
+      type="checkbox"
+      [attr.id]="id"
+      [attr.checked]="value || null"
+      [disabled]="disabled ? true : null"
+      (input)="valueChanged($event)"
+      (blur)="touched()"
+    />
+
+    <label
+      *ngIf="label"
+      class="checkbox__label {{ labelPosition }}"
+      [attr.for]="id"
+      >{{ label }}</label
+    >
+  </div>
+
+  <span *ngIf="description" class="checkbox__description paragraph size-m">{{
+    description
+  }}</span>
+
+  <app-control-errors
+    *ngIf="displayErrors && control"
+    [control]="control"
+  ></app-control-errors>
+</div>
