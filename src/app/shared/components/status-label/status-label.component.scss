@@ -1,0 +1,46 @@
+@import "../../../../styles/mixins";
+
+:host {
+  @include flex-center(both);
+  width: fit-content;
+
+  label {
+    border: none;
+    padding: 4px 11px;
+    border-radius: var(--border-radius-default);
+  }
+
+  &.slim {
+    label {
+      padding: 2px 15px;
+    }
+  }
+
+  &.primary {
+    label {
+      color: var(--color-primary-100);
+      background-color: rgb(from var(--color-primary-100) r g b / 16%);
+    }
+  }
+
+  &.secondary {
+    label {
+      color: var(--color-black-100);
+      background-color: var(--color-secondary-30);
+    }
+  }
+
+  &.green {
+    label {
+      color: var(--color-action-success);
+      background-color: rgb(from var(--color-action-success) r g b / 16%);
+    }
+  }
+
+  &.danger {
+    label {
+      color: var(--color-action-fail);
+      background-color: rgb(from var(--color-action-fail) r g b / 16%);
+    }
+  }
+}
