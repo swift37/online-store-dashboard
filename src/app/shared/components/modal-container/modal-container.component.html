@@ -1,0 +1,15 @@
+<div class="modal" [@modal]="this.containerState" (@modal.done)="onClose()">
+  <header class="modal__header">
+    <p class="modal__title sub-heading size-s">{{ this.title }}</p>
+
+    <span class="modal__close" (click)="triggerOutAnimation()">
+      <app-svg-icon
+        class="icon"
+        iconName="fi_x"
+        iconStyle="feather"
+      ></app-svg-icon>
+    </span>
+  </header>
+
+  <ng-content></ng-content>
+</div>
