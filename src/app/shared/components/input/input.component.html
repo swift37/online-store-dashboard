@@ -1,0 +1,89 @@
+<div
+  class="custom-control"
+  [ngClass]="{
+    disabled: disabled,
+    filled:
+      !control?.validator &&
+      !control?.asyncValidator &&
+      control?.touched &&
+      control?.value,
+    validated:
+      (control?.validator || control?.asyncValidator) &&
+      control?.valid &&
+      control?.touched,
+    failed: control?.invalid && control?.touched,
+    slim: slim,
+    'emphasized-text': emphasizedText,
+    'inner-label': innerLabel,
+    'filled-style': filledStyle,
+    'hide-check': hideCheck
+  }"
+>
+  <label
+    *ngIf="label"
+    class="custom-control__label size-l"
+    for="{{ id ? id : '' }}"
+    >{{ label }}</label
+  >
+
+  <div class="custom-control__container">
+    <app-svg-icon
+      *ngIf="iconName != null"
+      class="custom-control__icon {{ iconPosition }}"
+      [iconName]="iconName"
+      [iconStyle]="iconStyle"
+    ></app-svg-icon>
+
+    <input
+      class="custom-control__control"
+      [type]="type"
+      [attr.id]="id"
+      [attr.value]="value"
+      [attr.placeholder]="disabled ? 'Disabled' : placeholder"
+      [disabled]="disabled ? true : null"
+      (input)="onChange($event)"
+      (blur)="touched()"
+    />
+
+    <span
+      *ngIf="control?.valid && control?.touched && control?.value"
+      class="custom-control__check"
+      ><app-svg-icon
+        iconName="vector"
+        iconStyle="light"
+        class="icon"
+      ></app-svg-icon
+    ></span>
+
+    <div
+      class="custom-control__spin"
+      *ngIf="type == 'number' && !hideSpin && !slim"
+    >
+      <button
+        type="button"
+        [disabled]="disabled ? true : null"
+        (click)="onIncrease()"
+      >
+        <app-svg-icon
+          class="icon"
+          iconName="counter-arrow-up"
+          iconStyle="bold"
+        ></app-svg-icon>
+      </button>
+
+      <button
+        type="button"
+        [disabled]="disabled ? true : null"
+        (click)="onDecrease()"
+      >
+        <app-svg-icon
+          class="icon"
+          iconName="counter-arrow-down"
+          iconStyle="bold"
+        ></app-svg-icon>
+      </button>
+    </div>
+  </div>
+
+  <app-control-errors *ngIf="control" [control]="control"></app-control-errors>
+</div>
