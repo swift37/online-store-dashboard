@@ -1,0 +1,230 @@
+@import "../../../../styles/mixins";
+
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.4s ease-in-out;
+}
+
+.top-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-nav-bg);
+}
+
+.header {
+  position: relative;
+  @include flex-center(vertical);
+  justify-content: space-between;
+  padding: 12px 24px;
+
+  &__page {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black-60);
+  }
+
+  &__content {
+    @include flex-center(vertical);
+    gap: 20px;
+
+    .notifications {
+      @include square(20px);
+      color: var(--color-primary-100);
+      cursor: pointer;
+    }
+
+    .avatar {
+      @include flex-center(both);
+      @include square(36px);
+      border-radius: var(--border-radius-default);
+      color: var(--color-black-100);
+      background-color: var(--color-secondary-20);
+      font-size: 14px;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 1px;
+      text-indent: 1px;
+    }
+  }
+}
+
+.divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: none;
+  border-top: 1px solid #f1f3f9;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb {
+  @include flex-center(vertical);
+  padding: 6px 24px;
+
+  &__home {
+    @include flex-center(vertical);
+    color: var(--color-primary-100);
+    text-decoration: none;
+
+    .icon {
+      @include square(16px);
+    }
+  }
+
+  &__level {
+    font-size: 12px;
+    font-weight: var(--font-weight-regular);
+    font-family: "Inter", sans-serif;
+    line-height: 15px;
+    color: var(--color-black-30);
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+
+    &::before {
+      content: "/";
+      margin: 0 11px;
+      color: var(--color-black-30);
+    }
+
+    &:not(:last-child) {
+      color: var(--color-primary-100);
+      pointer-events: all;
+      cursor: pointer;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+
+  &__main-links,
+  &__bottom-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__main-links {
+    gap: 24px;
+  }
+
+  &__bottom-links {
+    gap: 14px;
+  }
+}
+
+.nav-link {
+  @include flex-center(vertical);
+  gap: 16px;
+  width: 100%;
+  padding: 0 20px;
+  border-radius: var(--border-radius-smooth);
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &__icon {
+    @include square(24px);
+    color: var(--color-black-50);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__label {
+    color: var(--color-black-50);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__counter {
+    @include flex-center(both);
+    @include circle(24px);
+    color: var(--color-black-100);
+    background-color: var(--color-secondary-100);
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &.active,
+  &:hover {
+    padding: 16px 20px;
+    background-color: var(--color-primary-100);
+
+    .nav-link__icon,
+    .nav-link__label {
+      color: var(--color-nav-bg);
+    }
+
+    .nav-link__counter {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.tech-iss-link {
+  @include flex-center(vertical);
+  gap: 12px;
+  width: 100%;
+  padding: 11px 16px;
+  color: var(--color-black-100);
+  background-color: rgba($color: #5e6366, $alpha: 10%);
+  border-radius: 16px;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  transition: background 0.3s ease-in-out;
+
+  &__icon {
+    width: 24px;
+  }
+
+  &__label {
+    color: var(--color-black-100);
+  }
+
+  &:hover {
+    background-color: rgba($color: #5e6366, $alpha: 20%);
+  }
+}
+
+.logout-link {
+  @include flex-center(vertical);
+  gap: 8px;
+  width: 100%;
+  padding: 11px;
+  color: var(--color-action-fail);
+  background-color: transparent;
+  border-radius: 16px;
+  margin-top: 10px;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
+
+  &__icon {
+    width: 24px;
+  }
+
+  &__label {
+    color: var(--color-action-fail);
+    transition: color 0.3s ease-in-out;
+  }
+
+  &:hover {
+    color: #c95f58;
+
+    &__label {
+      color: #c95f58;
+    }
+  }
+}

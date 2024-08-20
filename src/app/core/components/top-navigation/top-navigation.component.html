@@ -1,0 +1,35 @@
+<nav class="top-nav">
+  <header class="header">
+    <p class="header__page sub-heading size-s">Dashboard</p>
+
+    <div class="header__content">
+      <app-svg-icon
+        class="notifications"
+        iconName="notification"
+        iconStyle="bulk"
+      ></app-svg-icon>
+
+      <span class="avatar">DV</span>
+    </div>
+  </header>
+
+  <hr class="divider" />
+
+  <nav class="breadcrumb">
+    <a [routerLink]="['']" class="breadcrumb__home"
+      ><app-svg-icon
+        class="icon"
+        iconName="home"
+        iconStyle="bulk"
+      ></app-svg-icon
+    ></a>
+
+    <a
+      *ngFor="let routeLevel of routeLevels"
+      [routerLink]="[routeLevel.url]"
+      class="breadcrumb__level"
+    >
+      {{ routeLevel.label }}
+    </a>
+  </nav>
+</nav>
