@@ -2,7 +2,6 @@
 
 .custom-control {
   $root: &;
-  $controls: input, select, textarea;
 
   position: relative;
   @include flex-center(vertical, true);
@@ -17,32 +16,34 @@
     height: var(--height-input);
   }
 
-  label {
+  &__label {
     position: block;
-    margin: 0 0 4px 4px;
+    height: 15px;
+    margin-bottom: 4px;
     z-index: 10;
     color: var(--color-black-70);
     transition: var(--transition-all);
   }
 
-  #{$controls} {
+  &__control {
     position: relative;
     width: 100%;
     height: 100%;
     padding: var(--padding-input);
     border: var(--border-input);
     border-radius: var(--border-radius-default);
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: var(--font-weight-regular);
     line-height: 19px;
-    color: var(--color-black-70);
+    color: #5e6366;
     background-color: transparent;
     z-index: 5;
     outline: none;
     transition: var(--transition-all);
 
     &::placeholder {
-      color: var(--color-black-40);
+      color: #abafb1;
     }
 
     &:disabled {
@@ -89,6 +90,7 @@
     color: var(--color-action-success);
     background-color: rgba($color: #32936f, $alpha: 24%);
     z-index: 10;
+    transition: var(--transition-all);
 
     .icon {
       width: 10px;
@@ -96,25 +98,29 @@
     }
   }
 
+  &.hide-check &__check {
+    display: none;
+  }
+
   &.inner-label {
     #{$root}__container {
       height: var(--height-input-labeled);
     }
 
-    label {
+    #{$root}__label {
       position: absolute;
       top: 8px;
       left: 16px;
       margin: 0;
     }
 
-    input {
+    #{$root}__control {
       padding: var(--padding-input-labeled);
     }
   }
 
   &.filled-style {
-    #{$controls} {
+    #{$root}__control {
       border: none !important;
       background-color: rgba($color: #eff1f9, $alpha: 60%);
 
@@ -124,99 +130,154 @@
     }
 
     &:focus-within {
-      #{$controls} {
+      #{$root}__control {
         background-color: rgba($color: #e9ecf8, $alpha: 90%);
       }
     }
 
     &.failed {
-      #{$controls} {
+      #{$root}__control {
         background-color: rgba($color: #fcf3f2, $alpha: 70%);
       }
     }
 
     &.validated {
-      #{$controls} {
+      #{$root}__control {
         background-color: rgba($color: #f0f9f6, $alpha: 70%);
       }
     }
 
-    #{$controls}:-webkit-autofill {
+    #{$root}__control:-webkit-autofill {
       background-color: rgba($color: #e9ecf8, $alpha: 90%);
       background-clip: border-box !important;
       -webkit-background-clip: border-box !important;
     }
   }
 
-  &:has(#{&}__icon.left) {
-    label {
+  &.slim {
+    #{$root}__container {
+      position: relative;
+      width: 100%;
+      height: var(--height-input-slim);
+    }
+
+    #{$root}__label {
+      font-size: 10px !important;
+      line-height: 12px !important;
+    }
+
+    #{$root}__control {
+      height: var(--height-input-slim);
+      font-size: 14px;
+      font-weight: var(--font-weight-medium);
+      line-height: 17px;
+      padding: var(--padding-input-slim);
+    }
+
+    #{$root}__icon {
+      @include square(16px);
+    }
+
+    #{$root}__check {
+      @include circle(16px);
+      right: 12px;
+
+      .icon {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+
+  &.emphasized-text {
+    #{$root}__label,
+    #{$root}__control {
+      color: var(--color-black-100) !important;
+      font-weight: var(--font-weight-medium) !important;
+    }
+  }
+
+  &__container:has(> #{&}__icon.left) {
+    #{$root}__label {
       left: 56px;
     }
 
-    #{$controls} {
+    #{$root}__control {
       padding-left: 56px;
     }
   }
 
-  &:has(#{&}__icon.right) {
+  &__container:has(> #{&}__icon.right) {
     #{$root}__check {
       right: 50px;
     }
 
-    label {
+    #{$root}__label {
       left: 16px;
     }
 
-    #{$controls} {
+    #{$root}__control {
       padding-left: 16px;
-      padding-right: 80px;
+      padding-right: 56px;
+    }
+  }
+
+  &__container:has(> #{&}__check) {
+    #{$root}__control {
+      padding-right: 52px;
+    }
+  }
+
+  &__container:has(> #{&}__icon.right) :has(> #{&}__check) {
+    #{$root}__control {
+      padding-right: 86px;
     }
   }
 
   &:focus-within {
-    label {
+    #{$root}__label {
       color: var(--color-primary-100);
     }
-    #{$controls} {
+    #{$root}__control {
       border-color: var(--color-primary-100);
     }
   }
 
   &.filled {
-    label {
+    #{$root}__label {
       color: var(--color-black-70);
     }
-    #{$controls} {
+    #{$root}__control {
       border-color: var(--color-black-70);
     }
   }
 
   &.failed {
-    label {
+    #{$root}__label {
       color: var(--color-action-fail);
     }
-    #{$controls} {
+    #{$root}__control {
       border-color: var(--color-action-fail);
     }
-    #{root}_message {
+    #{root}__message {
       color: var(--color-action-fail);
     }
   }
 
   &.validated {
-    label {
+    #{$root}__label {
       color: var(--color-action-success);
     }
-    #{$controls} {
+    #{$root}__control {
       border-color: var(--color-action-success);
     }
   }
 
   &:has(input:-webkit-autofill) {
-    label {
+    #{$root}__label {
       color: var(--color-primary-100);
     }
-    #{$controls}:-webkit-autofill {
+    #{$root}__control:-webkit-autofill {
       background-clip: text;
       border-color: var(--color-primary-100);
       -webkit-text-fill-color: var(--color-black-70);
