@@ -1,0 +1,115 @@
+@import "../../../../styles/mixins";
+
+:host {
+  display: block;
+  width: 330px;
+  height: 145px;
+
+  &.primary {
+    .card {
+      background-color: var(--color-primary-100);
+    }
+
+    .icon-container.primary {
+      color: #fff;
+      background-color: rgba($color: #fff, $alpha: 16%);
+    }
+
+    .item {
+      &__label,
+      &__current-value {
+        color: #fff;
+      }
+
+      &__progress {
+        color: var(--color-primary-10);
+      }
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 11px 15px;
+  background-color: #fff;
+  border-radius: var(--border-radius-smooth);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 0;
+  }
+
+  &__content {
+    display: flex;
+    gap: 32px;
+  }
+}
+
+.icon-container {
+  @include flex-center(both);
+  @include square(36px);
+  border-radius: var(--border-radius-default);
+
+  .icon {
+    @include square(20px);
+  }
+
+  &.primary {
+    color: var(--color-primary-100);
+    background-color: rgb(from var(--color-primary-100) r g b / 12%);
+  }
+
+  &.secondary {
+    color: var(--color-black-100);
+    background-color: rgb(from var(--color-secondary-100) r g b / 16%);
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  width: 100%;
+
+  &__label {
+    color: var(--color-black-30);
+
+    &.red {
+      color: var(--color-action-fail);
+    }
+  }
+
+  &__value {
+    @include flex-center(vertical);
+    gap: 7px;
+  }
+
+  &__current-value {
+    color: var(--color-black-60);
+  }
+
+  &__progress {
+    &::after {
+      content: "%";
+    }
+
+    &.growing {
+      color: var(--color-action-success);
+
+      &::before {
+        content: "+";
+      }
+    }
+
+    &.declining {
+      color: var(--color-action-fail);
+    }
+  }
+}
