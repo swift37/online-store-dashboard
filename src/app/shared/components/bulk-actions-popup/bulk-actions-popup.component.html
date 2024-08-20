@@ -1,0 +1,34 @@
+<div class="actions-popup">
+  <p class="actions-popup__title">Bulk Actions</p>
+
+  <form
+    class="actions-popup__actions-group"
+    [formGroup]="this.actionsForm"
+    (ngSubmit)="onApply()"
+  >
+    <div *ngFor="let def of this.actionDefs" class="action-line">
+      <label for="" class="action-line__label size-l">{{ def.label }}</label>
+
+      <div class="action-line__action select">
+        <app-select
+          placeholder="Select option"
+          [options]="def.selectParams!.options"
+          [settings]="def.selectParams!.settings"
+          [slim]="true"
+          [emphasizedText]="true"
+          [hideCheck]="true"
+          [formControlName]="def.field"
+        ></app-select>
+      </div>
+    </div>
+
+    <app-button
+      class="actions-popup__apply-btn"
+      type="submit"
+      design="filled"
+      color="primary"
+      size="full-slim"
+      >Apply</app-button
+    >
+  </form>
+</div>
